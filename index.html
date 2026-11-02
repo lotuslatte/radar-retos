@@ -410,13 +410,13 @@ RET.addUnit({
       id: "E1", title: "Tu cuenta, tus reglas", moment: "Antes", contact: "kim",
       takeaway: "Decide quién te escribe y qué datos muestras, y elige hoy a quién le contarías una duda.",
       chat: [["in", "Oye, anoche a la 1 de la mañana te escribió una cuenta que no conozco, ¿no?"], ["in", "Tu número sigue en tu biografía. Cualquiera te puede escribir al WhatsApp."]],
-      senal: ["Enciende tu radar", "Tu cuenta, tus reglas", "Quien capta adapta su historia a lo que ve en tu perfil. No se trata de dejar las redes: se trata de decidir quién te escribe y qué datos muestras."],
+      senal: ["Enciende tu radar", "Tu cuenta, tus reglas", "Quien te escribe con una oferta así adapta su historia a lo que ve en tu perfil. No se trata de dejar las redes: se trata de decidir quién te escribe y qué datos muestras."],
       puntos: ["De noche y a solas es cuando más llegan estos mensajes.", "Cuanto más necesitas el dinero, más vale revisar una oferta.", "Si buscas «trabajo» en redes, el algoritmo te muestra más grupos y cuentas así.", "Las ofertas buenas no tienen apuro."],
       ej: {idx: 1, tag: "Dato a la vista", text: "Con tu número a la vista, cualquier persona puede pasarte directo a un chat privado."},
       ex: [
-        {type: "swipe", prompt: "¿Te protege o no hace falta?", left: "No hace falta", right: "Te protege", cards: [["Ocultar mi ubicación en historias y fotos", "R", "Con la ubicación se puede armar una historia a tu medida."], ["Borrar todas mis redes", "L", "No hace falta. Tener un perfil público no es una señal por sí mismo."], ["Aceptar solicitudes solo de quien conozco", "R", "Menos cuentas desconocidas en tu bandeja."], ["Dejar de jugar en línea", "L", "Jugar con otras personas es normal. Lo útil es fijarse en lo que busca cada mensaje."]]},
-        {type: "multi", prompt: "¿Qué ajustarías antes de que llegue un mensaje? Marca todo lo que te protege.", items: [["Quitar mi número de la biografía", 1, "Evita que te pasen directo a un chat privado."], ["Ocultar mi colegio y mi ubicación", 1, "Son datos con los que se puede armar una historia a tu medida."], ["Elegir quién me puede escribir por mensaje", 1, "Tú decides quién entra a tu bandeja."], ["Guardar Chat 100 en mis contactos", 1, "Tenerlo a mano ayuda si algún día lo necesitas."], ["Borrar todas mis redes", 0, "No hace falta. Tener un perfil público no es una señal por sí mismo."], ["Dejar de conocer gente por internet", 0, "Conocer gente en línea es normal. Lo útil es fijarse en las señales."]]},
-        {type: "fill", prompt: "Completa la frase", before: "Quien capta adapta su historia a lo que ve en tu", after: ".", opts: ["perfil", "colegio", "casa"], ok: 0, why: "Por eso conviene ocultar el número, el colegio y la ubicación."}]
+        {type: "pick", prompt: "Una cuenta que no conoces te escribe: «Vi que estudias en el San José y que vives por el mercado…». ¿De dónde sacó eso?", opts: ["De lo que muestras en tu perfil", "Se lo contó alguien del colegio", "Lo adivinó por tu foto"], ok: 0, why: "Puede pasar de varias formas, pero lo más común es el perfil: con el colegio y la ubicación a la vista, cualquiera arma una historia a tu medida."},
+        {type: "swipe", prompt: "¿Te protege o no hace falta?", left: "No hace falta", right: "Te protege", cards: [["Ocultar mi ubicación en historias y fotos", "R", "Con la ubicación se puede armar una historia a tu medida."], ["Poner la cuenta privada pero aceptar a todos", "L", "Si aceptas a cualquiera, la cuenta privada no filtra nada."], ["Aceptar solicitudes solo de quien conozco", "R", "Menos cuentas desconocidas en tu bandeja."], ["Dejar de jugar en línea", "L", "Jugar con otras personas es normal. Lo útil es fijarse en lo que busca cada mensaje."]]},
+        {type: "multi", prompt: "¿Qué ajustarías antes de que llegue un mensaje? Marca todo lo que te protege.", items: [["Quitar mi número de la biografía", 1, "Evita que te pasen directo a un chat privado."], ["Ocultar mi colegio y mi ubicación", 1, "Son datos con los que se puede armar una historia a tu medida."], ["Elegir quién me puede escribir por mensaje", 1, "Tú decides quién entra a tu bandeja."], ["Guardar Chat 100 en mis contactos", 1, "Tenerlo a mano ayuda si algún día lo necesitas."], ["Poner una edad mayor en mi perfil", 0, "No te protege: te escriben como si fueras adulta."], ["Usar una foto sin cara pero dejar mi colegio", 0, "No te protege: el colegio y la ubicación dan más pistas que tu cara."]]}]
     },
     {
       id: "E2", title: "Tu plan B", moment: "Antes", contact: "kim",
@@ -426,9 +426,9 @@ RET.addUnit({
       puntos: ["Contar no te obliga a nada.", "El gancho puede ser alguien cercano. Por eso conviene tener un plan B: otra persona de tu familia, una amistad mayor o Chat 100.", "Muchas personas que cortaron a tiempo ya habían escuchado una advertencia."],
       ej: {idx: 2, tag: "Plan B", text: "Tenerlo decidido antes ayuda cuando algo pasa de noche y a solas."},
       ex: [
+        {type: "build", prompt: "Arma el mensaje para tu persona de confianza", target: "Si algo me incomoda, te mando captura", extra: ["borro", "nada"], why: "Dejarlo dicho desde antes hace más fácil contarlo cuando pase algo."},
         {type: "pairs", prompt: "Une cada ayuda con lo que hace", pairs: [["Chat 100", "Escribir por chat, 24 h"], ["Línea 100", "Llamar, 24 h"], ["Línea 1818", "Denunciar trata, anónimo"], ["La plataforma", "Reportar la cuenta"]]},
-        {type: "build", prompt: "Arma la frase", target: "Elijo hoy a dos personas de confianza", extra: ["mañana", "nadie", "tres"], why: "Elegirlas antes de necesitarlas hace más fácil contarlo cuando pase algo."},
-        {type: "swipe", prompt: "¿Mito o realidad?", left: "Mito", right: "Realidad", cards: [["«Muchas veces quien capta usa su perfil real.»", "R", "No todo es un perfil falso: fíjate en lo que busca el mensaje."], ["«Si alguien es amable, es seguro.»", "L", "Que sea amable no lo hace seguro."], ["«Te pueden pedir una foto de entrada, sin conversación previa.»", "R", "A veces el pedido llega en el primer mensaje."]]}]
+        {type: "swipe", prompt: "¿Mito o realidad?", left: "Mito", right: "Realidad", cards: [["«Muchas veces quien te escribe con una oferta así usa su perfil real.»", "R", "No todo es un perfil falso: fíjate en lo que busca el mensaje."], ["«Si alguien es amable, es seguro.»", "L", "Que sea amable no lo hace seguro."], ["«Te pueden pedir una foto de entrada, sin conversación previa.»", "R", "A veces el pedido llega en el primer mensaje."]]}]
     }
   ]
 });
@@ -448,7 +448,7 @@ RET.addUnit({
       ej: {idx: 0, tag: "Te promete demasiado", text: "Un pago alto sin experiencia busca que no revises la oferta."},
       ex: [
         {type: "pairs", prompt: "Une cada señal con su ejemplo", pairs: [["Te promete demasiado", "«Ganas S/ 200 al día sin experiencia.»"], ["Te deja en deuda", "«Te pagamos el pasaje, allá nos arreglamos.»"], ["Te aísla", "«Mejor no le cuentes a nadie.»"], ["Te pide cada vez más", "«Ahora mándame otra foto.»"]]},
-        {type: "pairs", prompt: "Une cada señal con su ejemplo", pairs: [["No se puede revisar", "«La dirección te la doy después.»"], ["Te apura o presiona", "«Solo quedan dos cupos, responde hoy.»"], ["Se gana tu confianza rápido", "«Vengo de parte de una amistad en común.»"], ["Te quiere llevar a un lugar", "«Ven sin compañía al departamento.»"]]},
+        {type: "multi", prompt: "¿Qué busca este mensaje? Marca todas las señales que tiene.", msg: {who: "ofertas", text: "Vengo de parte de tu prima, me dijo que necesitas chamba. Solo quedan dos cupos, responde hoy."}, items: [["Se gana tu confianza rápido", 1, "«Vengo de parte de tu prima» usa a alguien cercano para que confíes."], ["Te apura o presiona", 1, "«Solo quedan dos cupos, responde hoy» busca que decidas sin pensar."], ["Te deja en deuda", 0, "En este mensaje no hay regalos ni adelantos."], ["Te quiere llevar a un lugar", 0, "Todavía no habla de un lugar ni de un viaje."]]},
         {type: "pick", prompt: "¿Qué busca este mensaje?", msg: {who: "sam", text: "Hola, soy Sam, del barrio. ¿Viste mi celular nuevo? Lo compré con lo que gané allá."}, opts: ["Se gana tu confianza rápido", "Te quiere llevar a un lugar", "Te pide cada vez más", "Te apura o presiona"], ok: 0, why: "Se gana tu confianza rápido: alguien conocido a quien «le fue bien» da confianza, pero no comprueba la oferta.", audio: 1}]
     },
     {
@@ -459,9 +459,9 @@ RET.addUnit({
       puntos: ["Si es demasiado bueno y urgente, no es para ti.", "Que sea amable no lo hace seguro."],
       ej: {idx: 1, tag: "Palabras gancho", text: "«Buena presencia» y «discreción» no cuadran en un empleo de atención al cliente."},
       ex: [
-        {type: "flag", prompt: "Toca las frases gancho", msg: {who: "sam"}, parts: [["Te pagan el pasaje de ida", "deuda"], [", allá te recogen. ", null], ["Mejor no lo comentes en tu casa", "aisla"], [", ", null], ["hay varias personas interesadas", "apura"], [".", null]], why: "Un pasaje solo de ida se vuelve deuda, el secreto te aísla y «hay más personas interesadas» te apura."},
-        {type: "flag", prompt: "Toca las frases gancho", msg: {who: "becas"}, parts: [["¡Felicidades! ", null], ["Te elegimos para una beca aunque no postulaste", "promete"], [". ", null], ["Incluye pasaje y alojamiento", "promete"], [". ", null], ["Deposita S/ 80 para separar tu cupo", "deuda"], [".", null]], why: "Que te elijan sin haber postulado no cuadra. El «todo incluido» busca que no revises. Y nadie te cobra por darte una beca."},
-        {type: "flag", prompt: "Toca las frases gancho", msg: {who: "yape"}, parts: [["Gana S/ 400 diarios desde tu celular", "promete"], [". Solo das likes. ", null], ["Para entrar yapeas S/ 10", "deuda"], [". ", null], ["Cupos hasta hoy a las 12", "apura"]], why: "S/ 400 al día por dar likes no existe. Un trabajo de verdad te paga a ti, no te cobra."}]
+        {type: "flag", prompt: "Toca las frases gancho del mensaje de Talento Norte", msg: {who: "talento"}, parts: [["Buscamos personal ", null], ["con buena presencia y discreción", "promete"], [" para atención al cliente. ", null], ["Pago de S/ 2,000 al mes, sin experiencia", "promete"], [". ", null], ["Solo quedan dos vacantes", "apura"], [".", null]], why: "«Buena presencia» y «discreción» no cuadran en atención al cliente, el pago alto sin experiencia busca que no revises y las vacantes que se acaban te apuran."},
+        {type: "swipe", prompt: "¿Frase gancho o frase normal de un aviso?", left: "Normal", right: "Gancho", cards: [["«Buscamos personas con buena presencia»", "R", "En un empleo de atención, la presencia no es un requisito real."], ["«Turno de 8 a. m. a 4 p. m., con contrato»", "L", "Horario y contrato son datos que puedes comprobar."], ["«Discreción absoluta»", "R", "Un trabajo normal no necesita secreto."], ["«Sueldo mínimo más comisiones»", "L", "Un sueldo realista, sin promesas de plata fácil."], ["«Dinero fácil desde casa»", "R", "La plata fácil es el gancho más común."]]},
+        {type: "pick", prompt: "En un grupo de Telegram dicen: «Gana S/ 400 diarios desde tu celular. Para entrar yapeas S/ 10». ¿Qué haces?", opts: ["Salgo del grupo sin yapear", "Yapeo S/ 10 para ver si es real", "Pregunto en el grupo si alguien ya cobró"], ok: 0, why: "Con los S/ 10 empieza la cadena, y quienes responden en el grupo suelen ser parte del canal."}]
     },
     {
       id: "R3", title: "Anuncios y cuentas", moment: "¿Nota algo raro?", contact: "grupo",
@@ -471,9 +471,9 @@ RET.addUnit({
       puntos: ["Cuenta sospechosa: nueva o anónima, con foto de anime, meme o IA, otra cuenta que responde por ella, o mensajes que se borran.", "Palabras gancho: «discreción», «buena presencia», «dinero fácil», fotos de billetes.", "Lo que no es señal: tener un perfil público, pasar horas en línea o conocer gente por internet."],
       ej: {idx: 1, tag: "La combinación", text: "Este anuncio junta pago alto, sin requisitos, solo inbox y urgencia."},
       ex: [
-        {type: "swipe", prompt: "Lee cada publicación. ¿Parece real o tiene señales de riesgo?", left: "Parece real", right: "Riesgo", cards: [["SE NECESITA PERSONAL. Sin experiencia. S/ 3,000 mensuales. Escribir al inbox. ¡Urgente!", "R", "Sin requisitos, sin detalles, pago alto, solo inbox y urgencia."], ["Tienda de calzado busca personal de ventas. Secundaria completa. Lunes a sábado, de 9 a. m. a 6 p. m. Sueldo mínimo más comisiones. CV a rrhh@calzadosnorte.pe", "L", "Tiene requisitos, horario, sueldo realista y pide el CV por correo. Aun así puedes buscar su RUC."], ["Trabajo en otra ciudad, todo pagado: pasaje, cuarto y comida. Solo escribe al 9XX XXX XXX.", "R", "Sin detalles del trabajo, solo un celular y «todo incluido», con viaje."], ["Cuenta «chamba_rapida26», creada hace una semana, foto de anime: «Escríbeme al privado, busco gente con buena presencia y discreción».", "R", "Cuenta nueva y anónima, palabras gancho y paso a lo privado."], ["Grupo «Plata Rápida»: «Gana S/ 500 a la semana desde tu celular. Solo yapea S/ 50 para entrar».", "R", "Te piden yapear para entrar y te prometen plata fácil desde el celular. Un trabajo de verdad te paga a ti, no te cobra."]]},
-        {type: "multi", prompt: "¿Qué hace sospechosa a una cuenta? Marca todo lo que aplica.", items: [["Fue creada hace pocos días", 1, "Una cuenta nueva no se puede comprobar."], ["Tiene foto de anime, meme o IA y ninguna publicación", 1, "No sabes quién está detrás."], ["Otra cuenta nueva responde por ella en los comentarios", 1, "Es una forma de fingir que es real."], ["Borra mensajes si no contestas rápido", 1, "Te apura y no deja rastro."], ["Tiene el perfil público", 0, "Un perfil público no es una señal por sí mismo."]]},
-        {type: "fill", prompt: "Completa la frase", before: "Si tienes que", after: "para entrar, el negocio eres tú.", opts: ["pagar", "esperar", "postular"], ok: 0, why: "Nadie te cobra por darte un trabajo o una beca."}]
+        {type: "swipe", prompt: "Lee cada publicación. ¿Parece real o tiene señales de riesgo?", left: "Parece real", right: "Riesgo", cards: [["SE NECESITA PERSONAL. Sin experiencia. S/ 3,000 mensuales. Escribir al inbox. ¡Urgente!", "R", "Sin requisitos, sin detalles, pago alto, solo inbox y urgencia."], ["Tienda de calzado busca personal de ventas. Secundaria completa. Lunes a sábado, de 9 a. m. a 6 p. m. Sueldo mínimo más comisiones. CV a rrhh@tienda-ejemplo.pe", "L", "Tiene requisitos, horario, sueldo realista y pide el CV por correo. Aun así puedes buscar su RUC."], ["Trabajo en otra ciudad, todo pagado: pasaje, cuarto y comida. Solo escribe al 9XX XXX XXX.", "R", "Sin detalles del trabajo, solo un celular y «todo incluido», con viaje."], ["Cuenta «chamba_rapida26», creada hace una semana, foto de anime: «Escríbeme al privado, busco gente con buena presencia y discreción».", "R", "Cuenta nueva y anónima, palabras gancho y paso a lo privado."], ["Grupo «Plata Rápida»: «Gana S/ 500 a la semana desde tu celular. Solo yapea S/ 50 para entrar».", "R", "Te piden yapear para entrar y te prometen plata fácil desde el celular. Un trabajo de verdad te paga a ti, no te cobra."]]},
+        {type: "multi", prompt: "¿Qué hace sospechosa a una cuenta? Marca todo lo que aplica.", items: [["Fue creada hace pocos días", 1, "Una cuenta nueva no se puede comprobar."], ["Tiene foto de anime, meme o IA y ninguna publicación", 1, "No sabes quién está detrás."], ["Otra cuenta nueva responde por ella en los comentarios", 1, "Es una forma de fingir que es real."], ["Borra mensajes si no contestas rápido", 1, "Te apura y no deja rastro."], ["Tiene el perfil público", 0, "Un perfil público no es una señal por sí mismo."], ["Tiene pocos seguidores", 0, "Muchas cuentas reales tienen pocos seguidores. Fíjate en lo demás."]]},
+        {type: "fill", prompt: "¿Qué frase completa un anuncio de riesgo?", before: "«Se busca personal, S/ 3,000 sin experiencia. Escribe al inbox,", after: "»", opts: ["cupos limitados hoy", "horario de 9 a 6", "entrevista en la oficina"], ok: 0, why: "El apuro se suma al pago alto y al inbox. Un horario o una entrevista en una oficina son datos que puedes comprobar."}]
     },
     {
       id: "R4", title: "Las fichas", moment: "¿Nota algo raro?", contact: "lucho",
@@ -485,8 +485,8 @@ RET.addUnit({
       ex: [
         {type: "flag", prompt: "Toca las frases gancho", msg: {who: "lucho"}, parts: [["Te mandé S/ 30 de recarga", "deuda"], [". ", null], ["El pasaje se descuenta de lo que ganes", "deuda"], [". ", null], ["No le cuentes a nadie del grupo", "aisla"], [", ", null], ["hay varias que quieren el puesto", "apura"], [".", null]], why: "La recarga y el pasaje descontado son deuda, el secreto te aísla y el «hay varias» te apura."},
         {type: "swipe", prompt: "¿Parece real o es tomar con clientes?", left: "Parece real", right: "Riesgo", cards: [["Se busca anfitriona para local nocturno. S/ 150 diario más propinas. Sin DNI.", "R", "Pago diario, local nocturno y sin DNI: oferta de riesgo. Si eres menor de edad, es explotación."], ["Bodega busca ayudante de lunes a sábado, de 8 a. m. a 4 p. m. Mayor de edad. Sueldo mínimo.", "L", "Tiene horario de día, pide mayoría de edad y un sueldo realista."], ["Busco chicas lindas para acompañar a clientes. Ganas por fichas, cuarto incluido.", "R", "«Acompañar», «fichas» y cuarto adentro."], ["Dama de compañía para eventos. Pago por noche, viaje pagado.", "R", "«Dama de compañía» con pago por noche y viaje es una oferta de riesgo."], ["Restaurante busca mesera para el turno de almuerzo. Contrato y uniforme. Escribe a rrhh@restaurante-ejemplo.pe", "L", "Turno de día, contrato y correo de la empresa. Aun así puedes buscar su RUC."]]},
-        {type: "fill", prompt: "Completa la frase", before: "Si te pagan por cada", after: "que te invitan, es tomar con clientes.", opts: ["trago", "hora", "venta"], ok: 0, why: "Las fichas son la parte que te llevas por cada trago que un cliente te invita."},
-        {type: "pick", prompt: "Te ofrecen el pasaje de ida y vuelta, y te dicen que después se descuenta de lo que ganes. ¿Qué es?", opts: ["Una deuda que te puede retener", "Un beneficio del trabajo", "Un adelanto normal"], ok: 0, why: "Una deuda que no conocías sirve para retenerte. Un trabajo digno no te cobra por llegar."}]
+        {type: "fill", prompt: "Completa el mensaje que te mandan", before: "«Ganas S/ 20 por cada", after: "que te invite un cliente»", opts: ["trago", "mesa atendida", "plato servido"], ok: 0, why: "Eso es una ficha: lo que te llevas por cada trago que un cliente te invita. Es tomar con clientes."},
+        {type: "pick", prompt: "Te ofrecen el pasaje de ida y vuelta, y te dicen que después se descuenta de lo que ganes. ¿Qué es?", opts: ["Una deuda que te pueden cobrar", "Un beneficio que dan en la chamba", "Un adelanto como en cualquier trabajo"], ok: 0, why: "Una deuda que no conocías sirve para retenerte. Un trabajo digno no te cobra por llegar."}]
     }
   ]
 });
@@ -505,9 +505,8 @@ RET.addUnit({
       puntos: ["Nadie te cobra por darte una beca o un trabajo.", "Busca la oferta en fuentes oficiales: becas en la página de Pronabec, empleos en portales.", "Un trabajo digno tiene contrato, horario y una paga acorde."],
       ej: {idx: 2, tag: "Te piden dinero y un documento", text: "Un trabajo de verdad te paga a ti, no te cobra. Y que te elijan sin haber postulado es una oferta que no cuadra."},
       ex: [
-        {type: "build", prompt: "Arma la primera pregunta", target: "¿Qué me piden a cambio?", extra: ["regalan", "mañana"], why: "Te están pidiendo algo cuando la oferta pide una imagen, un documento, dinero, un dato o un traslado."},
-        {type: "build", prompt: "Arma la segunda pregunta", target: "¿Qué me falta saber?", extra: ["sobra", "pagar"], why: "El nombre, la dirección, con quién vas y qué pasa si no te gusta."},
         {type: "swipe", prompt: "Te ofrecen una beca. Clasifica cada tarjeta.", left: "Me piden", right: "Me falta saber", cards: [["S/ 80 de depósito", "L", "Nadie te cobra por darte una beca."], ["Una foto de mi DNI", "L", "Con tu DNI pueden hacer trámites a tu nombre."], ["El nombre de la institución", "R", "Sin nombre no puedes comprobar nada."], ["Viajar a otra ciudad", "L", "Un traslado también es un pedido."], ["Dónde voy a vivir y con quién", "R", "Un lugar seguro deja que tu familia lo conozca."], ["Quién paga la vuelta", "R", "Un pasaje solo de ida no cuadra."]]},
+        {type: "pick", prompt: "La beca te pide S/ 80 y una foto de tu DNI. ¿Qué te preguntas primero?", opts: ["¿Qué me piden y qué no sé todavía?", "¿Hasta qué hora puedo depositar?", "¿Les sirve una copia del DNI?"], ok: 0, why: "Las dos preguntas: qué te piden a cambio (S/ 80 y tu DNI) y qué te falta saber (el nombre de la institución, dónde vas a vivir). Las otras dos ya dan por hecho que vas a pagar."},
         {type: "pairs", prompt: "Une qué compruebas con dónde", pairs: [["Una empresa", "RUC en Sunat"], ["Un empleo", "Portales de empleo"], ["Una beca", "Pronabec"], ["Un perfil", "Antigüedad y comentarios"]]}]
     },
     {
@@ -518,9 +517,9 @@ RET.addUnit({
       puntos: ["El canal da pistas: un empleo real pide el CV por correo.", "Antes de ir: ¿dónde exactamente?, ¿con quién?, ¿quién más va?, ¿quién paga el pasaje y qué pasa si no me gusta?", "Una empresa con RUC también puede engañar."],
       ej: {idx: 1, tag: "Te pide cada vez más", text: "Para atender en una tienda no hace falta una foto de cuerpo entero."},
       ex: [
-        {type: "build", prompt: "Arma la pregunta incómoda", target: "¿Para qué necesitan una foto de cuerpo entero?", extra: ["cuándo", "bonita"], why: "Para atender en una tienda no hace falta una foto de cuerpo entero."},
-        {type: "multi", prompt: "Antes de ir, ¿qué preguntas? Marca todas las que sirven.", items: [["¿Dónde exactamente?", 1, "Con la dirección puedes comprobar el lugar."], ["¿Con quién?", 1, "Saber con quién vas a estar te ayuda a decidir."], ["¿Quién más va?", 1, "Ir sin compañía te aísla."], ["¿Quién paga el pasaje y qué pasa si no me gusta?", 1, "Un pasaje solo de ida no cuadra."], ["¿Qué ropa llevo?", 0, "No te ayuda a saber si es seguro."], ["¿Me guardas el secreto?", 0, "Guardar el secreto te aísla."]]},
-        {type: "pick", prompt: "¿Qué significa esta respuesta?", msg: {who: "talento", text: "Eso te lo damos después. ¿Te interesa o no?"}, opts: ["Evita darte datos y te apura: es una señal", "Es normal, todas las empresas responden así", "Que ya te contrataron"], ok: 0, why: "Una empresa real responde sin rodeos. Si evita darte datos, ya tienes tu respuesta."}]
+        {type: "build", prompt: "Arma la pregunta incómoda", target: "¿Para qué necesitan una foto de cuerpo entero?", extra: ["cuándo", "otra"], why: "Para atender en una tienda no hace falta una foto de cuerpo entero."},
+        {type: "multi", prompt: "Antes de ir, ¿qué preguntas? Marca todas las que sirven.", items: [["¿Dónde exactamente?", 1, "Con la dirección puedes comprobar el lugar."], ["¿Con quién?", 1, "Saber con quién vas a estar te ayuda a decidir."], ["¿Quién más va?", 1, "Ir sin compañía te aísla."], ["¿Quién paga el pasaje y qué pasa si no me gusta?", 1, "Un pasaje solo de ida no cuadra."], ["¿Qué ropa llevo?", 0, "No te ayuda a saber si es seguro."], ["¿Me pueden recoger en mi casa?", 0, "Suena cómodo, pero si te recogen no controlas adónde te llevan."]]},
+        {type: "pick", prompt: "¿Qué significa esta respuesta?", msg: {who: "talento", text: "Eso te lo damos después. ¿Te interesa o no?"}, opts: ["Que evita darte datos y te apura", "Que así trabajan todas las agencias", "Que ya te separaron la vacante"], ok: 0, why: "Una empresa real responde sin rodeos. Si evita darte datos, ya tienes tu respuesta."}]
     }
   ]
 });
@@ -536,12 +535,12 @@ RET.addUnit({
       takeaway: "Puedes cortar con las primeras señales. La primera foto no se manda. Nunca es tarde para parar.",
       chat: [["in", "¿Cómo te fue hoy en el cole?"], ["in", "Eres diferente al resto de tu salón, se nota que piensas más."]],
       senal: ["Decide", "Notar no es cortar", "Después de notar algo raro, decide. Puedes cortar en cualquier momento con una frase corta: «No gracias.» Nunca es tarde para parar."],
-      puntos: ["La primera foto es el umbral: no mandes ni una.", "Mucha gente sigue por interés, necesidad, confianza o porque la otra persona es amable. Seguir no te hace culpable.", "Perder algo es mejor que seguir: lo que pusiste, el celular regalado o la «oportunidad»."],
+      puntos: ["No mandes ni la primera foto: empieza suave y va subiendo.", "Mucha gente sigue por interés, necesidad, confianza o porque la otra persona es amable. Seguir no te hace culpable.", "Perder algo es mejor que seguir: lo que pusiste, el celular regalado o la «oportunidad»."],
       ej: {idx: 1, tag: "Se gana tu confianza rápido", text: "No tienes que esperar a una amenaza. Un halago que te separa del resto ya es una señal."},
       ex: [
-        {type: "stop", prompt: "Los mensajes llegan uno por uno. Toca «¡Alto!» cuando cortarías.", who: "jordan", msgs: [["¿Cómo te fue hoy en el cole?", ""], ["Eres diferente al resto de tu salón, se nota que piensas más.", "Se gana tu confianza rápido"], ["¿En tu casa revisan tu celular?", "Te aísla"], ["Mejor hablemos por WhatsApp, aquí no puedo.", "Te aísla"], ["Mándame una foto, solo para mí.", "Te pide cada vez más · la primera foto es el umbral"], ["Si no me mandas, les cuento a tus contactos que tú me escribiste.", "Te apura o presiona"]], texts: ["Cortaste con las primeras señales. No necesitabas más pruebas.", "Cortaste en el paso a lo privado. Las señales ya venían desde antes: el halago que te separa y la pregunta por tu casa.", "Cortaste cuando llegó el pedido o la amenaza. Nunca es tarde para parar; la próxima vez puedes fijarte en las señales de antes."], textFirst: "Ese mensaje todavía era normal. La primera señal llegó después, con el halago que te separa del resto de tu salón. Igual, si algo no te cuadra, puedes cortar cuando quieras.", textNone: "No tocaste «¡Alto!» y llegaron todos los mensajes, hasta la amenaza. Debajo de cada mensaje está su señal: desde el halago ya podías cortar. Si te pasa de verdad, puedes parar en cualquier mensaje."},
-        {type: "fill", prompt: "Completa la frase", before: "La primera", after: "es el umbral: no mandes ni una.", opts: ["foto", "respuesta", "llamada"], ok: 0, why: "Empieza suave y va subiendo. Lo que envías puede usarse después para presionarte."},
-        {type: "swipe", prompt: "¿Sigues o cortas aquí?", left: "Sigo", right: "Corto", cards: [["«Mándame una foto, solo para mí.»", "R", "La primera foto es el umbral."], ["Tu amiga del salón: «¿Cómo te fue en el examen?»", "L", "Una conversación normal con alguien que conoces."], ["«Si no me mandas, les cuento a tus contactos.»", "R", "Es una amenaza: razón para cortar y pedir ayuda."], ["«Te pagamos el pasaje de ida, allá te recogen.»", "R", "Un pasaje solo de ida no cuadra."]]}]
+        {type: "stop", prompt: "Los mensajes llegan uno por uno. Toca «¡Alto!» cuando cortarías.", who: "jordan", msgs: [["¿Cómo te fue hoy en el cole?", ""], ["Eres diferente al resto de tu salón, se nota que piensas más.", "Se gana tu confianza rápido"], ["¿En tu casa revisan tu celular?", "Te aísla"], ["Mejor hablemos por WhatsApp, aquí no puedo.", "Te aísla"], ["Mándame una foto, solo para mí.", "Te pide cada vez más · no mandes ni la primera"], ["Si no me mandas, les cuento a tus contactos que tú me escribiste.", "Te apura o presiona"]], texts: ["Cortaste con las primeras señales. No necesitabas más pruebas.", "Cortaste en el paso a lo privado. Las señales ya venían desde antes: el halago que te separa y la pregunta por tu casa.", "Cortaste cuando llegó el pedido o la amenaza. Nunca es tarde para parar; la próxima vez puedes fijarte en las señales de antes."], textFirst: "Ese mensaje todavía era normal. La primera señal llegó después, con el halago que te separa del resto de tu salón. Igual, si algo no te cuadra, puedes cortar cuando quieras.", textNone: "No tocaste «¡Alto!» y llegaron todos los mensajes, hasta la amenaza. Debajo de cada mensaje está su señal: desde el halago ya podías cortar. Si te pasa de verdad, puedes parar en cualquier mensaje."},
+        {type: "fill", prompt: "Te escriben: «una nomás, de tu cara, no pasa nada». Completa tu respuesta.", before: "«No voy a mandar", after: "»", opts: ["ninguna", "solo una", "después"], ok: 0, why: "No mandes ni la primera: empieza con algo que parece normal y después piden más."},
+        {type: "swipe", prompt: "¿Sigues o cortas aquí?", left: "Sigo", right: "Corto", cards: [["«Mándame una foto, solo para mí.»", "R", "No mandes ni la primera."], ["Tu amiga del salón: «¿Cómo te fue en el examen?»", "L", "Una conversación normal con alguien que conoces."], ["«Si no me mandas, les cuento a tus contactos.»", "R", "Es una amenaza: razón para cortar y pedir ayuda."], ["«Te pagamos el pasaje de ida, allá te recogen.»", "R", "Un pasaje solo de ida no cuadra."]]}]
     },
     {
       id: "D2", title: "Cuéntalo", moment: "¿Decide seguir?", contact: "conf",
@@ -552,8 +551,8 @@ RET.addUnit({
       ej: {idx: 1, tag: "Con captura", text: "La captura le da a la otra persona lo que necesita para ayudarte."},
       ex: [
         {type: "choice", prompt: "Te ofrecieron un trabajo y algo no te cuadra. ¿Qué le escribes a alguien de confianza? Todas suman; algunas ayudan más.", choices: [["«Voy a ir a una entrevista mañana.»", 2, "Contar el plan ayuda. Sin la duda, la otra persona no puede ver lo que no cuadra."], ["«Mira esta captura. Algo no me cuadra, ¿qué piensas?»", 5, "Mostrar la captura le da a la otra persona lo que necesita para ayudarte."], ["«Corté un chat raro. Solo quería que lo sepas.»", 5, "Contar que cortaste no es confesar nada. Si vuelven a escribir, no lo cargas sin apoyo."], ["Escribo a Chat 100: no tengo a quién contarle.", 5, "Si no hay una persona segura, Chat 100 también es alguien."], ["No le cuento a nadie: ya lo resolví.", 4, "Cortar por tu cuenta también protege: así lo hicieron muchas que cortaron a tiempo. Si vuelven a escribir, contar con alguien ayuda."]]},
-        {type: "build", prompt: "Arma el mensaje", target: "Mira esta captura. Algo no me cuadra.", extra: ["nada", "perfecto"], why: "La captura habla por ti: no tienes que explicarlo todo."},
-        {type: "pick", prompt: "Te da miedo que te quiten el celular si cuentas. ¿Qué puedes hacer?", opts: ["Empezar mostrando una captura, o escribir a Chat 100", "No contarlo nunca", "Borrar el chat para que nadie lo vea"], ok: 0, why: "Tu miedo es comprensible. Contar que cortaste no es confesar una falta, y si borras el chat pierdes las pruebas."}]
+        {type: "build", prompt: "Anoche bloqueaste una cuenta rara. Arma el mensaje para tu mamá.", target: "Anoche bloqueé una cuenta rara, mira", extra: ["perdón", "nada"], why: "Contar que cortaste no es pedir perdón: hiciste algo para protegerte."},
+        {type: "pick", prompt: "Te da miedo que te quiten el celular si cuentas. ¿Qué puedes hacer?", opts: ["Empezar mostrando una captura", "No contarlo hasta estar segura", "Borrar el chat para que no lo vean"], ok: 0, why: "Tu miedo es comprensible. Contar que cortaste no es confesar una falta, y si borras el chat pierdes las pruebas."}]
     }
   ]
 });
@@ -569,12 +568,12 @@ RET.addUnit({
       takeaway: "No necesitas explicar ni tener pruebas para cortar. Una frase corta basta.",
       chat: [["in", "Mándame una foto tuya, solo para mí."], ["in", "Si me mandas una, te yapeo S/ 50."], ["out", "No voy a mandar nada."]],
       senal: ["Actúa", "Una frase corta basta", "No necesitas explicar ni tener pruebas para cortar. Una frase corta es suficiente, y no responder también es una salida válida."],
-      puntos: ["«No gracias», «Mejor no, gracias», «No voy a mandar nada», «No voy a dar mi DNI», «No voy a ir», «No me gusta cómo me hablas».", "La primera foto es el umbral: no mandes ni una."],
+      puntos: ["«No gracias», «Mejor no, gracias», «No voy a mandar nada», «No voy a dar mi DNI», «No voy a ir», «No me gusta cómo me hablas».", "No mandes ni la primera foto: empieza suave y va subiendo."],
       ej: {idx: 2, tag: "Frase para cortar", text: "No hace falta explicar por qué. Después puedes capturar, reportar y bloquear."},
       ex: [
-        {type: "build", prompt: "Te piden fotos. Arma la frase.", target: "No voy a mandar nada.", extra: ["todo", "sí"], why: "La primera foto es el umbral: no mandes ni una."},
+        {type: "pick", prompt: "Le dijiste «No voy a mandar nada» y te responde: «Ya pues, no seas así, una nomás». ¿Qué haces?", opts: ["Lo dejo en visto y bloqueo", "Le explico por qué no quiero", "Le mando una sin cara"], ok: 0, why: "No tienes que explicar: explicar abre una discusión. Una sin cara sigue siendo una foto."},
         {type: "pairs", prompt: "Une cada situación con su frase", pairs: [["Te piden fotos", "«No voy a mandar nada.»"], ["Te piden tu DNI", "«No voy a dar mi DNI.»"], ["Te citan en un departamento", "«No voy a ir.»"], ["Te presionan o te halagan de más", "«No me gusta cómo me hablas.»"]]},
-        {type: "build", prompt: "Te piden tu DNI. Arma la frase.", target: "No voy a dar mi DNI.", extra: ["tu", "foto"], why: "Retener un documento es una forma de control."}]
+        {type: "build", prompt: "Te citan en un departamento. Arma tu respuesta.", target: "No voy a ir.", extra: ["hoy", "sola"], why: "«No voy a ir hoy» o «no voy a ir sola» dejan la puerta abierta. «No voy a ir» basta."}]
     },
     {
       id: "T2", title: "Plan de salida", moment: "Se ven en persona", contact: "talento",
@@ -585,8 +584,8 @@ RET.addUnit({
       ej: {idx: 1, tag: "Te quiere llevar a un lugar", text: "Si aceptas la movilidad, no controlas adónde te llevan ni cómo vuelves."},
       ex: [
         {type: "multi", prompt: "Supón que decides ir. Marca todo lo que incluye tu plan de salida.", items: [["Alguien sabe adónde voy, con quién y a qué hora vuelvo", 1, "Si algo pasa, alguien sabe dónde buscarte."], ["Voy con alguien de confianza", 1, "Ir con alguien te da apoyo para salir."], ["Acuerdo una hora para avisar: si no aviso, me buscan", 1, "Funciona aunque te quedes sin saldo o sin datos."], ["No entrego mi DNI, mis fotos ni mi ubicación", 1, "Retener un documento es una forma de control."], ["Llevo saldo, datos y dinero para volver", 1, "Te permite irte por tu cuenta."], ["Acepto la movilidad que me mandan", 0, "No controlas adónde te llevan ni cómo vuelves."], ["Dejo a quien me acompaña afuera y entro sin compañía", 0, "Te separa de quien te puede ayudar."]]},
-        {type: "fill", prompt: "Completa la frase", before: "Acuerda una hora para avisar: si no avisas, ", after: ".", opts: ["te buscan", "te castigan", "pierdes el trabajo"], ok: 0, why: "Funciona aunque te quedes sin saldo o sin datos."},
-        {type: "pick", prompt: "Llegaste y te dicen que quien te acompaña espere abajo. ¿Qué haces?", opts: ["Me voy: separarme de quien me acompaña es una señal", "Subo un ratito nomás", "Les doy mi DNI para que confíen"], ok: 0, why: "Separarte de quien te acompaña es una señal. Nunca es tarde para irte."}]
+        {type: "fill", prompt: "Antes de ir, le escribes a tu prima. Completa el mensaje.", before: "«Voy a la entrevista del centro. Si a las 8 no te escribo,", after: "»", opts: ["llámame y búscame", "no pasa nada", "ya llegué"], ok: 0, why: "Una hora acordada funciona aunque te quedes sin saldo o sin datos: si no avisas, alguien te busca."},
+        {type: "pick", prompt: "Llegaste y te dicen que quien te acompaña espere abajo. ¿Qué haces?", opts: ["Me voy de ahí", "Subo un ratito nomás", "Subo, pero dejo el celular prendido"], ok: 0, why: "Separarte de quien te acompaña es una señal. Con el celular prendido igual quedas sola arriba. Puedes irte aunque ya estés ahí."}]
     },
     {
       id: "T3", title: "Cierre seguro", moment: "Después", contact: "jx2",
@@ -597,8 +596,8 @@ RET.addUnit({
       ej: {idx: 2, tag: "Te deja en deuda", text: "«Me debes» busca que sientas una obligación que no tienes."},
       ex: [
         {type: "order", prompt: "Ordena los pasos. Tócalos en el orden en que los harías.", steps: [["Capturar el chat y el perfil", "Primero las pruebas: después de bloquear, el chat puede desaparecer."], ["Reportar la cuenta", "Protege a otras personas."], ["Bloquear la cuenta", "Corta el contacto. Si aparece otra cuenta, bloquéala también."], ["Contárselo a alguien de confianza", "Para no cargarlo sin apoyo si vuelve a escribir."]]},
-        {type: "build", prompt: "Arma el orden del cierre seguro", target: "Captura, reporta y bloquea.", extra: ["borra", "paga"], why: "En ese orden. Y cuéntalo a alguien."},
-        {type: "pick", prompt: "Te amenazan con publicar una foto si no yapeas. ¿Qué haces?", opts: ["No pago, guardo capturas y busco ayuda", "Pago para que se calme", "Mando otra foto"], ok: 0, why: "No pagues ni mandes más. Guarda capturas del chat, del perfil y del número, y busca ayuda."}]
+        {type: "pick", prompt: "La cuenta nueva te escribe: «Me debes una respuesta». ¿Qué le debes?", opts: ["Nada, no le debo nada", "Una respuesta corta, para que pare", "Una explicación de por qué lo bloqueé"], ok: 0, why: "No le debes nada a quien te escribe. Responder, aunque sea corto, le confirma que esta cuenta sí te llega."},
+        {type: "multi", prompt: "Te amenazan con publicar una foto si no yapeas. Marca lo que haces.", items: [["Guardo capturas del chat y del número", 1, "Son tus pruebas para denunciar."], ["Se lo cuento a alguien de confianza o a Chat 100", 1, "No tienes que pasarlo sin apoyo."], ["No pago", 1, "Pagar no detiene la extorsión."], ["Le yapeo una parte para ganar tiempo", 0, "Pagar, aunque sea una parte, le muestra que funciona: después pide más."], ["Borro la conversación para que nadie la vea", 0, "Si la borras, pierdes las pruebas."]]}]
     }
   ]
 });
@@ -618,19 +617,19 @@ RET.addUnit({
       ej: {idx: 1, tag: "Mito", text: "Aceptar una oferta no quita que sea explotación, y con menores de edad siempre es trata."},
       ex: [
         {type: "swipe", prompt: "¿Mito o realidad?", left: "Mito", right: "Realidad", cards: [["«Si acepté la oferta, no es explotación.»", "L", "Aceptar no quita que sea explotación. Con menores de edad siempre es trata."], ["«Si tengo celular y vuelvo a casa, no puede ser trata.»", "L", "La trata no siempre es encierro: también hay control con deudas, multas o amenazas."], ["«Las amenazas y las deudas inventadas también se denuncian.»", "R", "Guarda capturas del chat, del perfil y del número."], ["«Contar que corté un chat es confesar que hice algo mal.»", "L", "Contar que cortaste no es confesar una falta: hiciste algo para protegerte."], ["«Si una persona adulta le pide fotos a alguien menor de edad, es abuso.»", "R", "Es abuso y se denuncia, aunque la persona menor haya respondido."]]},
-        {type: "swipe", prompt: "¿Mito o realidad?", left: "Mito", right: "Realidad", cards: [["«En casa, lo mejor es castigar o quitar el celular.»", "L", "Responder sin castigo hace que la próxima vez te lo cuenten."], ["«Si quien me escribe usa su perfil real, no puede ser captación.»", "L", "Muchas veces quien capta usa su perfil real."], ["«Mucha gente no se reconoce como víctima de trata.»", "R", "Si algo de esto te suena, puedes escribir a Chat 100 para hablarlo."], ["«El grooming es abuso sexual.»", "R", "Se denuncia, aunque la persona menor haya respondido."]]},
-        {type: "pick", prompt: "Mandaste una foto y ahora te amenazan. ¿De quién es la culpa?", opts: ["De quien amenaza. No es tu culpa", "Tuya, por mandarla", "Mitad y mitad"], ok: 0, why: "No es tu culpa, aunque hayas respondido o mandado algo. Quien amenaza comete un delito."}]
+        {type: "pick", prompt: "Tu amiga te cuenta que su mamá le quitó el celular cuando le contó de un chat raro. ¿Qué le dices?", opts: ["Que contarlo estuvo bien", "Que mejor no cuente nada la próxima", "Que borre el chat y ya"], ok: 0, why: "Contarlo estuvo bien. Cuando en casa responden con castigo, cuesta volver a contar; si pasa, otra persona de confianza o Chat 100 también sirven."},
+        {type: "fill", prompt: "Mandaste una foto y ahora te amenazan. Completa la frase.", before: "La culpa es de", after: ".", opts: ["quien amenaza", "quien mandó la foto", "las dos partes"], ok: 0, why: "No es tu culpa, aunque hayas respondido o mandado algo. Quien amenaza comete un delito."}]
     },
     {
       id: "P2", title: "Dónde y cómo", moment: "Después", contact: "kim",
       takeaway: "Guarda capturas, el número y las fechas. Reportar protege a otras personas.",
       chat: [["in", "Oye, me están amenazando y quiero denunciar. ¿Qué necesito?"], ["out", "Guarda todo. Te acompaño."]],
       senal: ["Reporta", "Guarda, cuenta y denuncia", "Guarda capturas del chat y del perfil, el número o la cuenta, y las fechas. Puedes contarlo con alguien de confianza y denunciar sin dar tu nombre en la Línea 1818."],
-      puntos: ["Las amenazas, las represalias y las «deudas» inventadas también se denuncian.", "Reportar la cuenta en la plataforma protege a otras personas."],
+      puntos: ["Las amenazas, que te hagan algo por denunciar y las «deudas» inventadas también se denuncian.", "Reportar la cuenta en la plataforma protege a otras personas."],
       ej: {idx: 1, tag: "Acompañar", text: "Acompañar sin juzgar ayuda más que el castigo."},
       ex: [
         {type: "pairs", prompt: "Une lo que quieres hacer con a dónde ir", pairs: [["Quiero escribir", "Chat 100"], ["Quiero llamar", "Línea 100"], ["Quiero denunciar sin dar mi nombre", "Línea 1818"], ["Que la cuenta no escriba a más gente", "Reportarla en la app"]]},
-        {type: "multi", prompt: "¿Qué guardas para denunciar? Marca todo lo que sirve.", items: [["Capturas del chat", 1, "Son tus pruebas."], ["Capturas del perfil", 1, "Sirven aunque la cuenta cambie de nombre."], ["El número o la cuenta", 1, "Permite identificar a quien escribe."], ["Las fechas", 1, "Ayudan a ordenar lo que pasó."], ["Nada, mejor lo borro todo", 0, "Si lo borras, pierdes las pruebas."]]},
+        {type: "multi", prompt: "¿Qué guardas para denunciar? Marca todo lo que sirve.", items: [["Capturas del chat", 1, "Son tus pruebas."], ["Capturas del perfil", 1, "Sirven aunque la cuenta cambie de nombre."], ["El número o la cuenta", 1, "Permite identificar a quien escribe."], ["Las fechas", 1, "Ayudan a ordenar lo que pasó."], ["Solo el último mensaje, el de la amenaza", 0, "Sirve, pero sin el resto del chat no se ve cómo empezó."]]},
         {type: "build", prompt: "Arma la frase para empezar a contarlo", target: "Me escribieron esto y no sé qué hacer.", extra: ["nunca", "nadie"], why: "Empieza por lo que pasó y muestra las capturas: ayudan a que te crean y a denunciar."}]
     }
   ]
@@ -707,7 +706,7 @@ RET.addUnit({
 
   function summary(s) {
     var rows = s.practice ? [['Volviste a practicar', 3]] :
-      [['Completaste el reto', 10], ['Respuestas que coinciden con la clave', s.hits * 2], ['Lo que aprendiste al revisar', s.reviewed], ['Tu mensaje', s.extra]];
+      [['Completaste el reto', 10], ['Coincidiste con RADAR', s.hits * 2], ['Lo que aprendiste al revisar', s.reviewed], ['Tu mensaje', s.extra]];
     rows = rows.filter(function (r) { return r[1] > 0; });
     var pts = rows.reduce(function (n, r) { return n + r[1]; }, 0);
     return { pts: pts, rows: rows, hits: s.hits, reviewed: s.reviewed, total: s.total };
@@ -808,7 +807,7 @@ RET.addUnit({
       ['Se gana tu confianza rápido', 'Halagos, enamoramiento en línea, «vengo de parte de alguien».'],
       ['Te quiere llevar a un lugar', 'Un departamento, un «estudio», un carro, un viaje o quedarte a dormir.'],
       ['Lo que no es señal por sí solo', 'Tener un perfil público. Pasar muchas horas en línea. Conocer gente por internet.'],
-      ['Para tener en cuenta', 'No todo es un perfil falso: muchas veces quien capta usa su perfil real. Te pueden pedir una foto de entrada, sin conversación previa.']]],
+      ['Para tener en cuenta', 'No todo es un perfil falso: muchas veces quien te escribe con una oferta así usa su perfil real. Te pueden pedir una foto de entrada, sin conversación previa.']]],
     ['Anuncios y cuentas de riesgo', null, [
       ['Anuncio de riesgo: cinco criterios', 'Sin requisitos («sin experiencia»). Sin detalles: no dice qué harás, dónde ni para quién. Pago alto: más de S/ 40 al día, S/ 300 a la semana o más que el sueldo mínimo, sin explicar por qué. Solo un celular o inbox. Urgencia. Casi todos los anuncios tienen alguno: lo que importa es la combinación.'],
       ['Cuenta sospechosa', 'Nueva o anónima, con foto de anime, meme o IA. Otra cuenta responde por ella en los comentarios. Borra el mensaje si no contestas rápido o insiste en pasar a WhatsApp.'],
@@ -827,11 +826,11 @@ RET.addUnit({
       ['Un perfil', 'Su antigüedad, su actividad y los comentarios de otras personas.'],
       ['Quien te recomendó', 'Esa persona, por otro canal: que confirme que te recomendó.'],
       ['Antes de ir', '¿Dónde exactamente?, ¿con quién?, ¿quién más va?, ¿quién paga el pasaje y qué pasa si no me gusta?'],
-      ['Más pistas', 'El canal da pistas: un empleo real pide el CV por correo. Si tienes que pagar para entrar, el negocio eres tú. Un trabajo digno tiene contrato, horario y una paga acorde.']]],
+      ['Más pistas', 'El canal da pistas: un empleo real pide el CV por correo. Si te cobran por entrar, desconfía: un trabajo te paga a ti. Un trabajo digno tiene contrato, horario y una paga acorde.']]],
     ['Cómo cortar', null, [
       ['Frases', '«No gracias.» «Mejor no, gracias.» «No voy a mandar nada.» «No voy a dar mi DNI.» «No voy a ir.» «No me gusta cómo me hablas.»'],
       ['En este orden', '1. Captura el chat y el perfil. 2. Reporta la cuenta o el anuncio. 3. Bloquea y sal del chat o del grupo, aunque pierdas lo que pusiste. 4. Cuéntalo a alguien de confianza.'],
-      ['Para tener en cuenta', 'La primera foto es el umbral: no mandes ni una. Te pueden volver a escribir desde otra cuenta. Si te amenazan con tus fotos o con tu familia: no pagues, no mandes más y guarda pruebas. Pagar no detiene la extorsión.']]],
+      ['Para tener en cuenta', 'No mandes ni la primera foto: empieza suave y va subiendo. Te pueden volver a escribir desde otra cuenta. Si te amenazan con tus fotos o con tu familia: no pagues, no mandes más y guarda pruebas. Pagar no detiene la extorsión.']]],
     ['Plan de salida si vas a verte con alguien', null, [
       ['Antes', 'Alguien sabe adónde vas, con quién y a qué hora vuelves. Compartes tu ubicación. Llevas saldo, datos y dinero para volver.'],
       ['Al llegar', 'Llegas temprano, vas con alguien, compruebas que el lugar sea el que dijeron y no entregas tu DNI.'],
@@ -842,7 +841,7 @@ RET.addUnit({
       ['Qué guardar', 'Capturas del chat y del perfil, el número o la cuenta, y las fechas. Las amenazas y las «deudas» inventadas también se denuncian.']])],
     ['Contarlo sin culpa', null, [
       ['Cómo', '1. Elige a quién. 2. Empieza por lo que pasó: «Me escribieron esto y no sé qué hacer». 3. Muestra las capturas. 4. Contar que cortaste no es confesar una falta.'],
-      ['Para recordar', 'No es tu culpa, aunque hayas respondido o mandado algo. El grooming es abuso. Aceptar la oferta no quita que sea explotación.'],
+      ['Para recordar', 'No es tu culpa, aunque hayas respondido o mandado algo. Que una persona adulta se gane tu confianza para pedirte fotos es abuso. Aceptar la oferta no quita que sea explotación.'],
       ['Para las familias', 'Escuchar sin juzgar ni castigar. No quitar el celular: así la próxima vez te lo cuentan.']]]
   ];
 
@@ -1249,7 +1248,7 @@ RET.addUnit({
     var foot;
     if (r) foot = resultHTML(ex, r);
     else if (ex.type === 'swipe' || ex.type === 'pairs' || ex.type === 'stop') foot = '';
-    else foot = '<div class="sh-foot"><button class="btn ' + (ready() ? 'go' : 'off') + '" data-act="check" ' + (ready() ? '' : 'disabled') + '>Comprobar</button></div>';
+    else foot = '<div class="sh-foot"><button class="btn ' + (ready() ? 'go' : 'off') + '" data-act="check" ' + (ready() ? '' : 'disabled') + '>Listo</button></div>';
     return head + msg + gameBody(ex) + foot;
   }
 
@@ -1361,7 +1360,7 @@ RET.addUnit({
     else if (ex.type === 'choice') { title = 'Tu mensaje'; }
     else if (ex.type === 'multi') { title = r.ok ? 'Coincide' : 'Otra mirada'; text = r.ok ? 'Marcaste todo lo que te protege.' : 'Cada tarjeta dice por qué.'; }
     else if (ex.type === 'order') { title = r.ok ? 'Coincide' : 'Otra mirada'; extra = r.ok ? '' : '<p class="r-ans">' + esc(r.answer) + '</p>'; text = ex.steps.map(function (st) { return st[0] + ': ' + st[1]; }).join(' '); }
-    else { title = r.ok ? 'Coincide' : 'Otra mirada'; if (!r.ok) extra = '<p class="r-ans"><b>La clave:</b> ' + esc(r.answer) + '</p>'; }
+    else { title = r.ok ? 'Coincide' : 'Otra mirada'; if (!r.ok) extra = '<p class="r-ans"><b>Lo que dice RADAR:</b> ' + esc(r.answer) + '</p>'; }
     var last = S.sess.pos >= S.sess.queue.length - 1;
     return '<div class="result ' + (good ? 'match' : 'look') + '"><div class="r-h">' + radi(good ? 'cheer' : 'think', 40) + '<b>' + esc(title) + '</b>' + (r.pts ? '<span class="r-pts">+' + r.pts + '</span>' : '') + '</div>' + extra + (text ? '<p>' + esc(text) + '</p>' : '') +
       '<button class="btn go" data-act="next">' + (last ? 'Ver cómo te fue' : 'Siguiente juego') + '</button></div>';
