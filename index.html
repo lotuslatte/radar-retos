@@ -50,11 +50,13 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
 .hd-1 { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .hd-brand { font-family: var(--display); letter-spacing: .18em; font-size: 14px; color: #d6eedb; }
 .hd-pills { display: flex; gap: 6px; }
-.hd-pills button { font-size: 12.5px; font-weight: 800; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; }
+.hd-pills button { position: relative; font-size: 12.5px; font-weight: 800; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; }
+/* Small pills, 44px tap areas: the invisible ::after extends each button. */
+.hd-pills button::after, .hd-back::after { content: ''; position: absolute; inset: -9px -3px; }
 .hd-pills button.now { background: #c8420a; }
 .hd-2 { display: flex; align-items: center; gap: 10px; }
-.hd-t { flex: 1; font-family: var(--display); font-size: 22px; } .hd-t.sm { font-family: var(--sys); font-size: 13.5px; font-weight: 700; color: #d6eedb; }
-.hd-back { display: inline-flex; align-items: center; gap: 2px; font-weight: 800; font-size: 14px; padding: 5px 10px 5px 6px; border-radius: 999px; background: rgba(255,255,255,.14); }
+.hd-t { flex: 1; font-family: var(--display); font-size: 22px; } .hd-t.sm { font-family: var(--sys); font-size: 13px; font-weight: 700; color: #d6eedb; min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.25; }
+.hd-back { position: relative; flex-shrink: 0; display: inline-flex; align-items: center; gap: 2px; font-weight: 800; font-size: 14px; padding: 5px 10px 5px 6px; border-radius: 999px; background: rgba(255,255,255,.14); }
 .hd-score { display: flex; gap: 6px; }
 .sc { display: inline-flex; align-items: center; gap: 4px; font-weight: 800; font-size: 14px; padding: 4px 10px; border-radius: 999px; }
 .sc.pts { background: #c8420a; color: #fff; } .sc.badges { background: rgba(255,255,255,.14); color: #fff; }
@@ -113,7 +115,7 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
 .ov-box { width: 100%; max-height: 92%; background: var(--bg); border-radius: 20px 20px 0 0; display: flex; flex-direction: column; animation: up .25s ease-out both; }
 @keyframes up { from { transform: translateY(40%); } }
 .ov-h { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--line); }
-.ov-h b { font-family: var(--display); font-size: 20px; color: var(--rg); } .ov-h button { font-weight: 800; color: var(--rg); }
+.ov-h b { font-family: var(--display); font-size: 20px; color: var(--rg); } .ov-h button { font-weight: 800; color: var(--rg); min-height: 44px; min-width: 44px; padding: 0 12px; margin: -6px -12px -6px 0; }
 .ov-b { overflow-y: auto; padding: 12px 14px 24px; display: flex; flex-direction: column; gap: 10px; }
 
 /* ---------- reto ---------- */
@@ -134,7 +136,7 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
 .sh-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 14px 8px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
 .sh-k { font-size: 12.5px; font-weight: 800; color: var(--mut); }
 .stepbar { display: flex; gap: 4px; flex-wrap: wrap; }
-.stepbar span { font-size: 11.5px; font-weight: 800; padding: 4px 8px; border-radius: 999px; background: #eef1ef; color: #5b6268; }
+.stepbar span { font-size: 12px; font-weight: 800; padding: 4px 8px; border-radius: 999px; background: #eef1ef; color: #5b6268; }
 .stepbar span.past { background: var(--tint); color: var(--rg); }
 .stepbar span.cur { background: #b23a0e; color: #fff; }
 .sh-body { flex: 1; overflow-y: auto; padding: 12px 14px 16px; display: flex; flex-direction: column; gap: 12px; }
@@ -163,12 +165,13 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
 .wave { flex: 1; display: flex; align-items: center; gap: 2px; } .wave i { width: 3px; border-radius: 2px; background: #9aa7a0; }
 .voice small { font-size: 12px; color: var(--mut); font-weight: 700; }
 .link { align-self: flex-start; color: var(--rg); font-weight: 800; font-size: 13.5px; text-decoration: underline; }
-.flag-t { line-height: 2.1; }
-.seg { cursor: pointer; border-bottom: 2.5px dotted #8d968f; padding: 2px 1px; border-radius: 4px; }
-.seg.on { background: #ffe3cf; border-bottom: 2.5px solid #b23a0e; color: #6e2407; }
-.seg.match { background: var(--match-bg); border-bottom: 2.5px solid var(--match-edge); color: var(--match-ink); }
-.seg.missed { background: #fff0bf; border-bottom: 2.5px solid #b08300; color: #5b4300; }
-.seg.extra { background: var(--look-bg); border-bottom: 2.5px solid var(--look-edge); color: var(--look-ink); }
+.flag-t { line-height: 44px; }
+.seg { cursor: pointer; padding: 11px 1px; border-radius: 4px; background-clip: content-box; -webkit-box-decoration-break: clone; box-decoration-break: clone; text-decoration: underline dotted #8d968f 2.5px; text-underline-offset: 5px; }
+/* Lines are 44px apart and each phrase is padded to fill its line: a 44px tap band. Colors stay on the text (content-box), not on the padding. */
+.seg.on { background-color: #ffe3cf; text-decoration: underline solid #b23a0e 2.5px; color: #6e2407; }
+.seg.match { background-color: var(--match-bg); text-decoration: underline solid var(--match-edge) 2.5px; color: var(--match-ink); }
+.seg.missed { background-color: #fff0bf; text-decoration: underline solid #b08300 2.5px; color: #5b4300; }
+.seg.extra { background-color: var(--look-bg); text-decoration: underline solid var(--look-edge) 2.5px; color: var(--look-ink); }
 
 .opts { display: flex; flex-direction: column; gap: 8px; }
 .opt { display: flex; gap: 10px; align-items: center; background: #fff; border: 2px solid #d4dbd6; border-radius: 14px; padding: 11px 13px; font-size: 15.5px; font-weight: 700; line-height: 1.35; text-align: left; }
@@ -190,7 +193,7 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
 .slot.match { border-color: var(--match-edge); color: var(--match-ink); background: var(--match-bg); } .slot.look { border-color: var(--look-edge); color: var(--look-ink); background: var(--look-bg); }
 .tiles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .tiles.col, .answer-line.col { flex-direction: column; align-items: stretch; }
-.tile { background: #fff; border: 2px solid #c9d3cc; border-radius: 12px; padding: 8px 13px; font-weight: 800; font-size: 16px; box-shadow: 0 3px 0 #d4dbd6; }
+.tile { min-height: 44px; min-width: 44px; background: #fff; border: 2px solid #c9d3cc; border-radius: 12px; padding: 8px 13px; font-weight: 800; font-size: 16px; box-shadow: 0 3px 0 #d4dbd6; }
 .tile:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 #d4dbd6; }
 .tile.ghost { background: #e9eeea; color: transparent; box-shadow: none; border-color: #e9eeea; }
 .tile.step { display: flex; gap: 10px; align-items: center; text-align: left; font-size: 15px; }
@@ -211,7 +214,9 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
 .btn.side { font-size: 14.5px; padding: 12px 6px; background: #fff; border: 2px solid var(--rg); color: var(--rg); border-radius: 14px; }
 .swipe-fb { border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.45; animation: pop .2s both; }
 .swipe-fb.match { background: var(--match-bg); color: var(--match-ink); } .swipe-fb.look { background: var(--look-bg); color: var(--look-ink); }
-.swipe-fb b { font-size: 16.5px; } .swipe-fb .btn { align-self: flex-end; }
+.swipe-fb b { font-size: 16.5px; } .swipe-fb .btn { align-self: flex-end; min-height: 44px; }
+.swipe-fb.match .btn.small { color: var(--match-ink); border-color: var(--match-edge); }
+.swipe-was { background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 10px 14px; margin-bottom: 10px; font-size: 15px; line-height: 1.45; font-weight: 700; color: var(--ink); }
 @keyframes pop { from { transform: scale(.96); opacity: 0; } }
 
 .pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -306,6 +311,12 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
 .rk-now p { font-size: 14px; }
 .rk-line b { color: var(--rg); font-size: 16px; }
 
+/* Tap targets of at least 44 px (2026-11-02). */
+.rk-btn, .rk-chip, .rk-input { min-height: 44px; }
+.rk-card summary { padding: 11px 0; margin: -11px 0; }
+.rk-tel { color: inherit; font-weight: 800; text-decoration: underline; }
+.rk-tel { display: inline-block; padding: 11px 8px; margin: -11px -8px; }
+
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -358,11 +369,11 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
 
   // People who write in the exercises: [name, initials, color, where].
   RET.WHO = {
-    kim: ['Kim', 'KI', '#49ac57', 'Amistad'],
+    kim: ['Kim', 'KI', '#2f7f3c', 'Amistad'],
     talento: ['Talento Norte', 'TN', '#2b4085', 'Oferta de empleo'],
     jx: ['jx_music07', 'JX', '#707073', 'Cuenta nueva'],
     jx2: ['jx_music07.2', 'JX', '#707073', 'Otra cuenta nueva'],
-    sam: ['Sam, del barrio', 'SA', '#f26529', 'Número desconocido'],
+    sam: ['Sam, del barrio', 'SA', '#b23a0e', 'Número desconocido'],
     kevin: ['Kevin_FF', 'K', '#7a4e9c', 'Contacto de un juego'],
     jordan: ['Jordan', 'JO', '#707073', 'Contacto de un juego'],
     becas: ['Becas Futuro', 'BF', '#2b4085', 'Cuenta de Facebook'],
@@ -371,8 +382,8 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
     ofertas: ['Ofertas al toque', 'OT', '#2b4085', 'Cuenta nueva'],
     grupo: ['Empleos del Norte', 'EN', '#707073', 'Grupo de Facebook'],
     lucho: ['Lucho', 'LU', '#2e7d4f', 'Grupo de compra y venta'],
-    conf: ['Alguien de confianza', 'AC', '#49ac57', 'Elige qué le escribes'],
-    radar: ['Radar', 'R', '#49ac57', 'Mitos y realidades']
+    conf: ['Alguien de confianza', 'AC', '#2f7f3c', 'Elige qué le escribes'],
+    radar: ['Radar', 'R', '#2f7f3c', 'Mitos y realidades']
   };
 
   RET.units = [];
@@ -443,24 +454,24 @@ RET.addUnit({
     {
       id: "R2", title: "La frase gancho", moment: "¿Nota algo raro?", contact: "talento",
       takeaway: "Notar algo raro ya es suficiente. Si es demasiado bueno y urgente, no es para ti.",
-      chat: [["in", "Hola, buenas tardes. Vimos tu comentario en el grupo de empleos."], ["in", "Buscamos personal con buena presencia y discreción para atención al cliente. Pago de S/ 2, 000 al mes, sin experiencia."], ["in", "Solo quedan dos vacantes. Avísame hoy."]],
+      chat: [["in", "Hola, buenas tardes. Vimos tu comentario en el grupo de empleos."], ["in", "Buscamos personal con buena presencia y discreción para atención al cliente. Pago de S/ 2,000 al mes, sin experiencia."], ["in", "Solo quedan dos vacantes. Avísame hoy."]],
       senal: ["Reconoce", "La frase gancho", "Algunas palabras buscan que no revises: «buena presencia», «discreción», «dinero fácil» o «sin experiencia» junto a un pago alto."],
       puntos: ["Si es demasiado bueno y urgente, no es para ti.", "Que sea amable no lo hace seguro."],
       ej: {idx: 1, tag: "Palabras gancho", text: "«Buena presencia» y «discreción» no cuadran en un empleo de atención al cliente."},
       ex: [
-        {type: "flag", prompt: "Toca las frases gancho", msg: {who: "sam"}, parts: [["Te pagan el pasaje de ida", "deuda"], [", allá te recogen. ", null], ["Mejor no lo comentes en tu casa", "aisla"], [", hay varias personas interesadas.", "apura"]], why: "Un pasaje solo de ida se vuelve deuda, el secreto te aísla y «hay más personas interesadas» te apura."},
-        {type: "flag", prompt: "Toca las frases gancho", msg: {who: "becas"}, parts: [["¡Felicidades! ", null], ["Te elegimos para una beca aunque no postulaste", "promete"], [". Incluye pasaje y alojamiento. ", null], ["Deposita S/ 80 para separar tu cupo", "deuda"], [".", null]], why: "Que te elijan sin haber postulado no cuadra, y nadie te cobra por darte una beca."},
-        {type: "flag", prompt: "Toca las frases gancho", msg: {who: "yape"}, parts: [["Gana S/ 400 diarios desde tu celular", "promete"], [". Solo das likes. ", null], ["Para entrar yapeas S/ 10", "deuda"], [". ", null], ["Cupos hasta hoy a las 12", "apura"]], why: "S/ 400 al día por dar likes no existe. Si tienes que pagar para entrar, el negocio eres tú."}]
+        {type: "flag", prompt: "Toca las frases gancho", msg: {who: "sam"}, parts: [["Te pagan el pasaje de ida", "deuda"], [", allá te recogen. ", null], ["Mejor no lo comentes en tu casa", "aisla"], [", ", null], ["hay varias personas interesadas", "apura"], [".", null]], why: "Un pasaje solo de ida se vuelve deuda, el secreto te aísla y «hay más personas interesadas» te apura."},
+        {type: "flag", prompt: "Toca las frases gancho", msg: {who: "becas"}, parts: [["¡Felicidades! ", null], ["Te elegimos para una beca aunque no postulaste", "promete"], [". ", null], ["Incluye pasaje y alojamiento", "promete"], [". ", null], ["Deposita S/ 80 para separar tu cupo", "deuda"], [".", null]], why: "Que te elijan sin haber postulado no cuadra. El «todo incluido» busca que no revises. Y nadie te cobra por darte una beca."},
+        {type: "flag", prompt: "Toca las frases gancho", msg: {who: "yape"}, parts: [["Gana S/ 400 diarios desde tu celular", "promete"], [". Solo das likes. ", null], ["Para entrar yapeas S/ 10", "deuda"], [". ", null], ["Cupos hasta hoy a las 12", "apura"]], why: "S/ 400 al día por dar likes no existe. Un trabajo de verdad te paga a ti, no te cobra."}]
     },
     {
       id: "R3", title: "Anuncios y cuentas", moment: "¿Nota algo raro?", contact: "grupo",
       takeaway: "Fíjate en la combinación: sin detalles, mucho dinero, solo un celular o inbox, apuro o una cuenta que no puedes comprobar.",
-      chat: [["sys", "Cinco publicaciones de hoy en el grupo"], ["in", "SE NECESITA PERSONAL. Sin experiencia. S/ 3, 000 mensuales. Escribir al inbox. ¡Urgente!"]],
+      chat: [["sys", "Cinco publicaciones de hoy en el grupo"], ["in", "SE NECESITA PERSONAL. Sin experiencia. S/ 3,000 mensuales. Escribir al inbox. ¡Urgente!"]],
       senal: ["Reconoce", "Anuncios y cuentas de riesgo", "Un anuncio de riesgo no tiene requisitos ni detalles del trabajo, paga demasiado, solo da un celular o un inbox, y te apura. Casi todos los anuncios tienen alguna de estas cosas: lo que importa es la combinación."],
       puntos: ["Cuenta sospechosa: nueva o anónima, con foto de anime, meme o IA, otra cuenta que responde por ella, o mensajes que se borran.", "Palabras gancho: «discreción», «buena presencia», «dinero fácil», fotos de billetes.", "Lo que no es señal: tener un perfil público, pasar horas en línea o conocer gente por internet."],
       ej: {idx: 1, tag: "La combinación", text: "Este anuncio junta pago alto, sin requisitos, solo inbox y urgencia."},
       ex: [
-        {type: "swipe", prompt: "Lee cada publicación. ¿Parece real o tiene señales de riesgo?", left: "Parece real", right: "Riesgo", cards: [["SE NECESITA PERSONAL. Sin experiencia. S/ 3, 000 mensuales. Escribir al inbox. ¡Urgente!", "R", "Sin requisitos, sin detalles, pago alto, solo inbox y urgencia."], ["Tienda de calzado busca personal de ventas. Secundaria completa. Lunes a sábado, de 9 a. m. a 6 p. m. Sueldo mínimo más comisiones. CV a rrhh@calzadosnorte.pe", "L", "Tiene requisitos, horario, sueldo realista y pide el CV por correo. Aun así puedes buscar su RUC."], ["Trabajo en otra ciudad, todo pagado: pasaje, cuarto y comida. Solo escribe al 9XX XXX XXX.", "R", "Sin detalles del trabajo, solo un celular y «todo incluido», con viaje."], ["Cuenta «chamba_rapida26», creada hace una semana, foto de anime: «Escríbeme al privado, busco gente con buena presencia y discreción».", "R", "Cuenta nueva y anónima, palabras gancho y paso a lo privado."], ["Grupo «Plata Rápida»: «Gana S/ 500 a la semana desde tu celular. Solo yapea S/ 50 para entrar».", "R", "Pagar para entrar y «pruebas» que no se pueden comprobar."]]},
+        {type: "swipe", prompt: "Lee cada publicación. ¿Parece real o tiene señales de riesgo?", left: "Parece real", right: "Riesgo", cards: [["SE NECESITA PERSONAL. Sin experiencia. S/ 3,000 mensuales. Escribir al inbox. ¡Urgente!", "R", "Sin requisitos, sin detalles, pago alto, solo inbox y urgencia."], ["Tienda de calzado busca personal de ventas. Secundaria completa. Lunes a sábado, de 9 a. m. a 6 p. m. Sueldo mínimo más comisiones. CV a rrhh@calzadosnorte.pe", "L", "Tiene requisitos, horario, sueldo realista y pide el CV por correo. Aun así puedes buscar su RUC."], ["Trabajo en otra ciudad, todo pagado: pasaje, cuarto y comida. Solo escribe al 9XX XXX XXX.", "R", "Sin detalles del trabajo, solo un celular y «todo incluido», con viaje."], ["Cuenta «chamba_rapida26», creada hace una semana, foto de anime: «Escríbeme al privado, busco gente con buena presencia y discreción».", "R", "Cuenta nueva y anónima, palabras gancho y paso a lo privado."], ["Grupo «Plata Rápida»: «Gana S/ 500 a la semana desde tu celular. Solo yapea S/ 50 para entrar».", "R", "Te piden yapear para entrar y te prometen plata fácil desde el celular. Un trabajo de verdad te paga a ti, no te cobra."]]},
         {type: "multi", prompt: "¿Qué hace sospechosa a una cuenta? Marca todo lo que aplica.", items: [["Fue creada hace pocos días", 1, "Una cuenta nueva no se puede comprobar."], ["Tiene foto de anime, meme o IA y ninguna publicación", 1, "No sabes quién está detrás."], ["Otra cuenta nueva responde por ella en los comentarios", 1, "Es una forma de fingir que es real."], ["Borra mensajes si no contestas rápido", 1, "Te apura y no deja rastro."], ["Tiene el perfil público", 0, "Un perfil público no es una señal por sí mismo."]]},
         {type: "fill", prompt: "Completa la frase", before: "Si tienes que", after: "para entrar, el negocio eres tú.", opts: ["pagar", "esperar", "postular"], ok: 0, why: "Nadie te cobra por darte un trabajo o una beca."}]
     },
@@ -492,7 +503,7 @@ RET.addUnit({
       chat: [["in", "¡Felicidades! Te elegimos para una beca de estudios en otra ciudad, aunque no postulaste."], ["in", "Incluye pasaje y alojamiento."], ["in", "Para separar tu cupo, deposita S/ 80 y envía una foto de tu DNI."]],
       senal: ["Asegúrate", "¿Qué me piden a cambio? ¿Qué me falta saber?", "Te están pidiendo algo cuando la oferta pide una imagen, un documento, dinero, un dato personal o un traslado. Ese es el punto de decisión: haz una pausa con las dos preguntas."],
       puntos: ["Nadie te cobra por darte una beca o un trabajo.", "Busca la oferta en fuentes oficiales: becas en la página de Pronabec, empleos en portales.", "Un trabajo digno tiene contrato, horario y una paga acorde."],
-      ej: {idx: 2, tag: "Te piden dinero y un documento", text: "Si tienes que pagar para entrar, el negocio eres tú. Y que te elijan sin haber postulado es una oferta que no cuadra."},
+      ej: {idx: 2, tag: "Te piden dinero y un documento", text: "Un trabajo de verdad te paga a ti, no te cobra. Y que te elijan sin haber postulado es una oferta que no cuadra."},
       ex: [
         {type: "build", prompt: "Arma la primera pregunta", target: "¿Qué me piden a cambio?", extra: ["regalan", "mañana"], why: "Te están pidiendo algo cuando la oferta pide una imagen, un documento, dinero, un dato o un traslado."},
         {type: "build", prompt: "Arma la segunda pregunta", target: "¿Qué me falta saber?", extra: ["sobra", "pagar"], why: "El nombre, la dirección, con quién vas y qué pasa si no te gusta."},
@@ -528,7 +539,7 @@ RET.addUnit({
       puntos: ["La primera foto es el umbral: no mandes ni una.", "Mucha gente sigue por interés, necesidad, confianza o porque la otra persona es amable. Seguir no te hace culpable.", "Perder algo es mejor que seguir: lo que pusiste, el celular regalado o la «oportunidad»."],
       ej: {idx: 1, tag: "Se gana tu confianza rápido", text: "No tienes que esperar a una amenaza. Un halago que te separa del resto ya es una señal."},
       ex: [
-        {type: "stop", prompt: "Los mensajes llegan uno por uno. Toca «¡Alto!» cuando cortarías.", who: "jordan", msgs: [["¿Cómo te fue hoy en el cole?", ""], ["Eres diferente al resto de tu salón, se nota que piensas más.", "Se gana tu confianza rápido"], ["¿En tu casa revisan tu celular?", "Te aísla"], ["Mejor hablemos por WhatsApp, aquí no puedo.", "Te aísla"], ["Mándame una foto, solo para mí.", "Te pide cada vez más · la primera foto es el umbral"], ["Si no me mandas, les cuento a tus contactos que tú me escribiste.", "Te apura o presiona"]], texts: ["Cortaste con las primeras señales. No necesitabas más pruebas.", "Cortaste en el paso a lo privado. Las señales ya venían desde antes: el halago que te separa y la pregunta por tu casa.", "Cortaste cuando llegó el pedido o la amenaza. Nunca es tarde para parar; la próxima vez puedes fijarte en las señales de antes."]},
+        {type: "stop", prompt: "Los mensajes llegan uno por uno. Toca «¡Alto!» cuando cortarías.", who: "jordan", msgs: [["¿Cómo te fue hoy en el cole?", ""], ["Eres diferente al resto de tu salón, se nota que piensas más.", "Se gana tu confianza rápido"], ["¿En tu casa revisan tu celular?", "Te aísla"], ["Mejor hablemos por WhatsApp, aquí no puedo.", "Te aísla"], ["Mándame una foto, solo para mí.", "Te pide cada vez más · la primera foto es el umbral"], ["Si no me mandas, les cuento a tus contactos que tú me escribiste.", "Te apura o presiona"]], texts: ["Cortaste con las primeras señales. No necesitabas más pruebas.", "Cortaste en el paso a lo privado. Las señales ya venían desde antes: el halago que te separa y la pregunta por tu casa.", "Cortaste cuando llegó el pedido o la amenaza. Nunca es tarde para parar; la próxima vez puedes fijarte en las señales de antes."], textFirst: "Ese mensaje todavía era normal. La primera señal llegó después, con el halago que te separa del resto de tu salón. Igual, si algo no te cuadra, puedes cortar cuando quieras.", textNone: "No tocaste «¡Alto!» y llegaron todos los mensajes, hasta la amenaza. Debajo de cada mensaje está su señal: desde el halago ya podías cortar. Si te pasa de verdad, puedes parar en cualquier mensaje."},
         {type: "fill", prompt: "Completa la frase", before: "La primera", after: "es el umbral: no mandes ni una.", opts: ["foto", "respuesta", "llamada"], ok: 0, why: "Empieza suave y va subiendo. Lo que envías puede usarse después para presionarte."},
         {type: "swipe", prompt: "¿Sigues o cortas aquí?", left: "Sigo", right: "Corto", cards: [["«Mándame una foto, solo para mí.»", "R", "La primera foto es el umbral."], ["Tu amiga del salón: «¿Cómo te fue en el examen?»", "L", "Una conversación normal con alguien que conoces."], ["«Si no me mandas, les cuento a tus contactos.»", "R", "Es una amenaza: razón para cortar y pedir ayuda."], ["«Te pagamos el pasaje de ida, allá te recogen.»", "R", "Un pasaje solo de ida no cuadra."]]}]
     },
@@ -561,7 +572,7 @@ RET.addUnit({
       puntos: ["«No gracias», «Mejor no, gracias», «No voy a mandar nada», «No voy a dar mi DNI», «No voy a ir», «No me gusta cómo me hablas».", "La primera foto es el umbral: no mandes ni una."],
       ej: {idx: 2, tag: "Frase para cortar", text: "No hace falta explicar por qué. Después puedes capturar, reportar y bloquear."},
       ex: [
-        {type: "build", prompt: "Te piden fotos. Arma la frase.", target: "No voy a mandar nada.", extra: ["una", "foto", "sí"], why: "La primera foto es el umbral: no mandes ni una."},
+        {type: "build", prompt: "Te piden fotos. Arma la frase.", target: "No voy a mandar nada.", extra: ["todo", "sí"], why: "La primera foto es el umbral: no mandes ni una."},
         {type: "pairs", prompt: "Une cada situación con su frase", pairs: [["Te piden fotos", "«No voy a mandar nada.»"], ["Te piden tu DNI", "«No voy a dar mi DNI.»"], ["Te citan en un departamento", "«No voy a ir.»"], ["Te presionan o te halagan de más", "«No me gusta cómo me hablas.»"]]},
         {type: "build", prompt: "Te piden tu DNI. Arma la frase.", target: "No voy a dar mi DNI.", extra: ["tu", "foto"], why: "Retener un documento es una forma de control."}]
     },
@@ -679,8 +690,11 @@ RET.addUnit({
   function check(s, ans) {
     var it = current(s), r = checkEx(it.ex, ans);
     if (it.checked) return it.checked;
-    if (r.ok) { s.hits += 1; r.pts = (r.pts || 0) + 2; } else { s.reviewed += 1; r.pts = 1; }
-    if (r.extra) s.extra += r.extra;
+    // «¿Qué harías?» earns only its own points (shown as «Tu mensaje»), not the +2 of a match.
+    if (it.ex.type === 'choice') { s.extra += r.extra; r.pts = r.extra; }
+    else if (r.ok) { s.hits += 1; r.pts = 2; } else { s.reviewed += 1; r.pts = 1; }
+    // Replaying a finished reto earns only the +3 of practising again (v4 rule).
+    if (s.practice) r.pts = 0;
     it.checked = r;
     return r;
   }
@@ -692,9 +706,8 @@ RET.addUnit({
   }
 
   function summary(s) {
-    var rows = [['Completaste el reto', 10], ['Respuestas que coinciden con la clave', s.hits * 2], ['Lo que aprendiste al revisar', s.reviewed]];
-    if (s.extra) rows.push(['Tu mensaje', s.extra]);
-    if (s.practice) rows.push(['Volviste a practicar', 3]);
+    var rows = s.practice ? [['Volviste a practicar', 3]] :
+      [['Completaste el reto', 10], ['Respuestas que coinciden con la clave', s.hits * 2], ['Lo que aprendiste al revisar', s.reviewed], ['Tu mensaje', s.extra]];
     rows = rows.filter(function (r) { return r[1] > 0; });
     var pts = rows.reduce(function (n, r) { return n + r[1]; }, 0);
     return { pts: pts, rows: rows, hits: s.hits, reviewed: s.reviewed, total: s.total };
@@ -713,7 +726,7 @@ RET.addUnit({
       var right = ex.parts.map(function (p, i) { return p[1] ? i : -1; }).filter(function (i) { return i >= 0; });
       var got = (a || []).slice().sort(function (x, y) { return x - y; });
       return { ok: got.length === right.length && got.every(function (v, i) { return v === right[i]; }), right: right,
-        answer: right.map(function (i) { return '«' + ex.parts[i][0].trim() + '»'; }).join(' · '), why: ex.why };
+        answer: right.map(function (i) { return '«' + ex.parts[i][0].replace(/^[\s,.;:]+|[\s,;:]+$/g, '') + '»'; }).join(' · '), why: ex.why };
     }
     if (t === 'order') {
       var okO = (a || []).length === ex.steps.length && a.every(function (v, i) { return v === i; });
@@ -726,10 +739,14 @@ RET.addUnit({
     }
     if (t === 'pairs') return { ok: true, mistakes: (a && a.mistakes) || 0 };
     if (t === 'stop') {
-      var k = a && a.stopped ? a.stopped : ex.msgs.length + 1;
+      // No tap: every message arrived, so nothing to praise. A tap on a message with no
+      // signal yet (the greeting) gets its own text instead of «primeras señales».
+      if (!(a && a.stopped)) return { ok: false, none: true, stopped: ex.msgs.length + 1, why: ex.textNone };
+      var k = a.stopped;
+      if (k === 1 && !ex.msgs[0][1]) return { ok: true, early: true, stopped: k, why: ex.textFirst };
       return { ok: true, stopped: k, why: ex.texts[k <= 3 ? 0 : k === 4 ? 1 : 2] };
     }
-    if (t === 'choice') { var c = ex.choices[a]; return { ok: true, extra: c[1], why: c[2], pts: c[1] - 2 }; }
+    if (t === 'choice') { var c = ex.choices[a]; return { ok: true, extra: c[1], why: c[2] }; }
     throw new Error('Unknown exercise type ' + t);
   }
 
@@ -759,9 +776,14 @@ RET.addUnit({
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
+  // [name, text, number to call]; the number becomes a tel: link.
   RK.LINES = [['Chat 100', 'Escribir por chat, gratis, 24 horas y confidencial: chat100.warminan.gob.pe.'],
-    ['Línea 100', 'Llamada gratuita, 24 horas. Orientación y apoyo si sientes miedo o te amenazan.'],
-    ['Línea 1818', 'Denuncia gratuita y anónima de ofertas sospechosas o de trata.']];
+    ['Línea 100', 'Llamada gratuita, 24 horas. Orientación y apoyo si sientes miedo o te amenazan.', '100'],
+    ['Línea 1818', 'Denuncia gratuita y anónima de ofertas sospechosas o de trata.', '1818'],
+    ['105', 'Emergencias de la Policía, gratis y 24 horas. Llama si estás en peligro ahora.', '105']];
+
+  function tel(num, label) { return '<a class="rk-tel" href="tel:' + esc(num) + '">' + esc(label) + '</a>'; }
+  RK.tel = tel;
 
   RK.LETTERS = [
     ['E', 'Enciende tu radar', '¿Tengo todo listo?', 'Tu cuenta, tus reglas. Elige hoy a quién le contarías algo raro. Las ofertas buenas no tienen apuro.'],
@@ -825,7 +847,7 @@ RET.addUnit({
   ];
 
   RK.PLAN = {
-    lines: [['c', 'Chat 100', 'Escribir, 24 h · chat100.warminan.gob.pe'], ['l', 'Línea 100', 'Llamar, 24 h'], ['d', 'Línea 1818', 'Denuncia anónima de trata']],
+    lines: [['p', '105 · Policía', 'Llamar si estás en peligro ahora, 24 h'], ['c', 'Chat 100', 'Escribir, 24 h · chat100.warminan.gob.pe'], ['l', 'Línea 100', 'Llamar, 24 h'], ['d', 'Línea 1818', 'Denuncia anónima de trata']],
     phrases: ['«No gracias.»', '«Mejor no, gracias.»', '«No voy a mandar nada.»', '«No voy a dar mi DNI.»', '«No voy a ir.»', '«No me gusta cómo me hablas.»'],
     exit: ['Alguien sabe adónde voy, con quién y a qué hora vuelvo', 'Comparto mi ubicación', 'Llevo saldo, datos y dinero para volver', 'Voy con alguien de confianza', 'Llego temprano y compruebo el lugar', 'No entrego mi DNI', 'Si no es lo que dijeron, me voy aunque ya esté ahí'],
     privacy: ['Quité mi número de celular del perfil', 'Oculté mi colegio, barrio o ubicación', 'Elegí quién me puede escribir', 'Acepto solicitudes solo de quien conozco', 'Desactivé la ubicación en historias y fotos']
@@ -875,7 +897,7 @@ RET.addUnit({
       }).join('') + '</section>' +
       RK.GUIDE.map(function (s) {
         return '<details class="rk-card"><summary><h3>' + esc(s[0]) + '</h3></summary>' + (s[1] ? '<p>' + esc(s[1]) + '</p>' : '') +
-          s[2].map(function (r) { return '<p><b>' + esc(r[0]) + '.</b> ' + esc(r[1]) + '</p>'; }).join('') + '</details>';
+          s[2].map(function (r) { return '<p><b>' + (r[2] ? tel(r[2], r[0]) : esc(r[0])) + '.</b> ' + esc(r[1]) + '</p>'; }).join('') + '</details>';
       }).join('') +
       '<p class="rk-foot">No es tu culpa. Nunca es tarde para parar.</p>';
   }
@@ -906,11 +928,12 @@ RET.addUnit({
 
   function ahoraHTML() {
     return '<section class="rk-card rk-now"><p><b>No es tu culpa. Gracias por buscar ayuda.</b> No tienes que contarlo todo ni tener pruebas para pedirla.</p>' +
-      '<p><b>Si estás en peligro ahora:</b> llama a la Línea 100 (24 h) o a la Línea 1818.</p>' +
+      '<p><b>Si estás en peligro ahora:</b> llama al ' + tel('105', '105') + ', la Policía (gratis, 24 h), o a la ' + tel('100', 'Línea 100') + ' (24 h).</p>' +
+      '<p><b>Si quieres denunciar una oferta o un caso de trata:</b> ' + tel('1818', 'Línea 1818') + ', gratis y anónima.</p>' +
       '<p><b>Si prefieres escribir:</b> Chat 100, gratis y las 24 horas, en chat100.warminan.gob.pe.</p>' +
       '<p><b>Si te amenazan con fotos o con tu familia:</b> no pagues ni mandes más. Guarda capturas antes de bloquear.</p>' +
       '<p><b>Si estás en una sesión de RADAR:</b> puedes hablar en privado con la persona que facilita.</p></section>' +
-      RK.LINES.map(function (l) { return '<section class="rk-card rk-line"><b>' + esc(l[0]) + '</b><p>' + esc(l[1]) + '</p></section>'; }).join('');
+      RK.LINES.map(function (l) { return '<section class="rk-card rk-line"><b>' + (l[2] ? tel(l[2], l[0]) : esc(l[0])) + '</b><p>' + esc(l[1]) + '</p></section>'; }).join('');
   }
 
   RK.mount = function (el, what) {
@@ -1261,7 +1284,7 @@ RET.addUnit({
         var cls = a === i ? ' sel' : '';
         if (r && ex.type === 'pick') cls = i === ex.ok ? ' match' : a === i ? ' look' : ' dim';
         if (r && ex.type === 'choice') cls = a === i ? ' match' : ' plain';
-        var pts = r && ex.type === 'choice' ? '<em>+' + ex.choices[i][1] + '</em>' : '';
+        var pts = r && ex.type === 'choice' && !S.sess.practice ? '<em>+' + ex.choices[i][1] + '</em>' : '';
         var note = r && ex.type === 'choice' ? '<small>' + esc(ex.choices[i][2]) + '</small>' : '';
         return '<button class="opt' + cls + '" data-opt="' + i + '" ' + (r ? 'disabled' : '') + '><span>' + esc(opts[i]) + note + '</span>' + pts + '</button>';
       }).join('') + '</div>';
@@ -1301,8 +1324,9 @@ RET.addUnit({
     if (ex.type === 'swipe') {
       var k = S.ui.card, c = ex.cards[k], fl = S.ui.flash;
       var counter = '<p class="swipe-n">Tarjeta ' + Math.min(k + 1, ex.cards.length) + ' de ' + ex.cards.length + '</p>';
-      var flash = fl ? '<div class="swipe-fb ' + (fl.ok ? 'match' : 'look') + '"><b>' + (fl.ok ? 'Coincide' : 'Otra mirada: ' + esc(fl.side)) + '</b><span>' + esc(fl.why) + '</span>' +
-        (fl.ok ? '' : '<button class="btn small" data-act="swipe-next">Siguiente</button>') + '</div>' : '';
+      // The card stays on screen above its explanation; the player taps to go on.
+      var flash = fl ? '<div class="swipe-was">' + esc(c[0]) + '</div><div class="swipe-fb ' + (fl.ok ? 'match' : 'look') + '"><b>' + (fl.ok ? 'Coincide' : 'Otra mirada: ' + esc(fl.side)) + '</b><span>' + esc(fl.why) + '</span>' +
+        '<button class="btn small" data-act="swipe-next">Siguiente</button></div>' : '';
       if (!c || fl) return counter + flash;
       return counter + '<div class="swipe-stage"><div class="swipe-card" id="swipe-card"><span class="sw-l">' + esc(ex.left) + '</span><span class="sw-r">' + esc(ex.right) + '</span><p>' + esc(c[0]) + '</p></div></div>' +
         '<div class="swipe-btns"><button class="btn side l" data-side="L">‹ ' + esc(ex.left) + '</button><button class="btn side r" data-side="R">' + esc(ex.right) + ' ›</button></div>';
@@ -1333,13 +1357,13 @@ RET.addUnit({
     var title, text = r.why || '', extra = '', good = r.ok;
     if (ex.type === 'swipe') { title = r.ok ? 'Coinciden todas' : r.right + ' de ' + r.of + ' coinciden'; text = r.ok ? 'Clasificaste cada tarjeta.' : 'En cada tarjeta viste por qué.'; good = true; }
     else if (ex.type === 'pairs') { title = 'Uniste todas las parejas'; text = ''; }
-    else if (ex.type === 'stop') { title = r.stopped <= 3 ? 'Cortaste a tiempo' : 'Cortaste'; }
+    else if (ex.type === 'stop') { title = r.none ? 'Llegaron todos los mensajes' : r.early ? 'Cortaste en el saludo' : r.stopped <= 3 ? 'Cortaste a tiempo' : 'Cortaste'; }
     else if (ex.type === 'choice') { title = 'Tu mensaje'; }
     else if (ex.type === 'multi') { title = r.ok ? 'Coincide' : 'Otra mirada'; text = r.ok ? 'Marcaste todo lo que te protege.' : 'Cada tarjeta dice por qué.'; }
     else if (ex.type === 'order') { title = r.ok ? 'Coincide' : 'Otra mirada'; extra = r.ok ? '' : '<p class="r-ans">' + esc(r.answer) + '</p>'; text = ex.steps.map(function (st) { return st[0] + ': ' + st[1]; }).join(' '); }
     else { title = r.ok ? 'Coincide' : 'Otra mirada'; if (!r.ok) extra = '<p class="r-ans"><b>La clave:</b> ' + esc(r.answer) + '</p>'; }
     var last = S.sess.pos >= S.sess.queue.length - 1;
-    return '<div class="result ' + (good ? 'match' : 'look') + '"><div class="r-h">' + radi(good ? 'cheer' : 'think', 40) + '<b>' + esc(title) + '</b><span class="r-pts">+' + r.pts + '</span></div>' + extra + (text ? '<p>' + esc(text) + '</p>' : '') +
+    return '<div class="result ' + (good ? 'match' : 'look') + '"><div class="r-h">' + radi(good ? 'cheer' : 'think', 40) + '<b>' + esc(title) + '</b>' + (r.pts ? '<span class="r-pts">+' + r.pts + '</span>' : '') + '</div>' + extra + (text ? '<p>' + esc(text) + '</p>' : '') +
       '<button class="btn go" data-act="next">' + (last ? 'Ver cómo te fue' : 'Siguiente juego') + '</button></div>';
   }
 
@@ -1422,7 +1446,6 @@ RET.addUnit({
     if (el) el.classList.add(side === 'L' ? 'out-l' : 'out-r');
     setTimeout(function () {
       renderReto();
-      if (ok) setTimeout(function () { if (S.ui.flash) { S.ui.flash = null; swipeAfter(ex); } }, ms(1100));
     }, ms(220));
   }
   function swipeAfter(ex) {
