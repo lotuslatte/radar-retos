@@ -1,6 +1,6 @@
 // Offline support for RADAR Retos. Pages are network-first so updates show up
 // on the next visit; everything else is cache-first.
-const CACHE = 'radar-retos-v6';
+const CACHE = 'radar-retos-v7';
 const ASSETS = [
   './',
   './index.html',
