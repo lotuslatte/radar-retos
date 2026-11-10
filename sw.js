@@ -1,6 +1,6 @@
 // Offline support for RADAR Retos. Pages are network-first so updates show up
 // on the next visit; everything else is cache-first.
-const CACHE = 'radar-retos-v7';
+const CACHE = 'radar-retos-v8';
 const ASSETS = [
   './',
   './index.html',
@@ -21,7 +21,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith('radar-retos-') && k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
