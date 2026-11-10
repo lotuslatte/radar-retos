@@ -118,7 +118,9 @@ svg { width: 20px; height: 20px; flex-shrink: 0; }
 .rnode.done small { color: var(--rg); }
 .rnode.next .rn-c { background: var(--ro-btn); border-color: var(--ro-btn); color: #fff; box-shadow: 0 3px 0 #8f2f0b; animation: pulse 1.8s ease-in-out infinite; }
 .rnode.next small { color: #a23409; font-weight: 800; }
-.rnode.later { opacity: .7; } .rnode.later .rn-c { border-style: dashed; }
+.rnode.later { opacity: .7; } .rnode.later .rn-c { border-style: dashed; color: var(--mut); }
+.rnode.later .rn-c svg { width: 18px; height: 18px; }
+.hint.spare { margin: 8px 2px 0; text-align: center; }
 @keyframes pulse { 50% { box-shadow: 0 3px 0 #8f2f0b, 0 0 0 7px rgba(200,66,10,.18); } }
 .settings-link { align-self: center; font-size: 13.5px; font-weight: 800; color: var(--rg); text-decoration: underline; padding: 8px; }
 
@@ -1016,7 +1018,7 @@ RET.addUnit({
 })(typeof window !== 'undefined' ? window : globalThis);
 
 ;
-RL.init({proto: 'retos', version: '5.0.2', done: 'top:6px;left:6px'});
+RL.init({proto: 'retos', version: '5.0.3', done: 'top:6px;left:6px'});
 ;
 /* RADAR kit shared by the three prototypes: splash with the radar sweep,
  * the RADAR guide, «Mi plan» and «¿Te está pasando?». Texts come from the v4
@@ -1281,6 +1283,7 @@ RL.init({proto: 'retos', version: '5.0.2', done: 'top:6px;left:6px'});
   var IC = {
     back: '<svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     check: '<svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    lock: '<svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.2" fill="currentColor"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>',
     star: '<svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z" fill="currentColor"/></svg>',
     medal: '<svg viewBox="0 0 24 24"><path d="M8 2h8l-2 6h-4z" fill="currentColor" opacity=".6"/><circle cx="12" cy="15" r="6.5" fill="currentColor"/></svg>',
     play: '<svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>',
@@ -1384,8 +1387,8 @@ RL.init({proto: 'retos', version: '5.0.2', done: 'top:6px;left:6px'});
       var nodes = u.lessons.map(function (l) {
         var d = store.done[l.id], isNext = l.id === next, open = unlocked(l.id), num = retoNumber(l.id);
         var cls = d ? 'done' : isNext ? 'next' : open ? 'open' : 'later';
-        var status = d ? d.best + ' pts' : isNext ? 'Empieza aquí' : open ? 'Por jugar' : 'Después';
-        return '<button class="rnode ' + cls + '" ' + (open ? 'data-reto="' + l.id + '"' : 'disabled') + '><span class="rn-c">' + (d ? IC.check : num) + '</span><b>' + esc(l.title) + '</b><small>' + status + '</small></button>';
+        var status = d ? d.best + ' pts' : isNext ? 'Empieza aquí' : open ? 'Por jugar' : 'Se abre al terminar el anterior';
+        return '<button class="rnode ' + cls + '" ' + (open ? 'data-reto="' + l.id + '"' : 'disabled') + ' aria-label="' + esc('Reto ' + num + ': ' + l.title + '. ' + status) + '"><span class="rn-c">' + (d ? IC.check : open ? num : IC.lock) + '</span><b>' + esc(l.title) + '</b><small>' + status + '</small></button>';
       }).join('');
       return '<section class="urow' + (all ? ' all' : hasNext ? ' has-next' : '') + '"><div class="u-let"><b>' + esc(u.letter) + '</b><small>' + esc(u.name) + '</small>' + (all ? '<i>' + IC.medal + '</i>' : '') + '</div><div class="u-nodes">' + nodes + '</div></section>';
     }).join('');
@@ -1568,14 +1571,16 @@ RL.init({proto: 'retos', version: '5.0.2', done: 'top:6px;left:6px'});
       }).join('') + '</div>';
     }
     if (ex.type === 'build' || ex.type === 'order') {
+      // Extra tiles are distractors; say so, or she tries to use them all (team review 2026-11-10).
+      var spare = ex.type === 'build' && !!(ex.extra && ex.extra.length);
       var isB = ex.type === 'build', words = isB ? E.tiles(ex) : ex.steps.map(function (st) { return st[0]; });
       var line = a.map(function (i, n) { return '<button class="tile ' + (isB ? '' : 'step') + '" data-out="' + n + '" ' + (r ? 'disabled' : '') + '>' + (isB ? '' : '<i>' + (n + 1) + '</i>') + esc(words[i]) + '</button>'; }).join('');
       var bank = S.ui.bank.map(function (i) {
         var used = a.indexOf(i) >= 0;
         return '<button class="tile ' + (isB ? '' : 'step') + (used ? ' ghost' : '') + '" data-in="' + i + '" ' + (used ? 'disabled' : '') + '>' + esc(words[i]) + '</button>';
       }).join('');
-      return '<div class="answer-line ' + (isB ? '' : 'col') + (r ? (r.ok ? ' match' : ' look') : '') + '">' + (line || '<span class="hint">' + (isB ? 'Toca las palabras en orden' : 'Toca los pasos en orden') + '</span>') + '</div>' +
-        (r ? '' : '<div class="tiles ' + (isB ? '' : 'col') + '">' + bank + '</div>');
+      return '<div class="answer-line ' + (isB ? '' : 'col') + (r ? (r.ok ? ' match' : ' look') : '') + '">' + (line || '<span class="hint">' + (isB ? (spare ? 'Toca en orden solo las palabras que necesitas' : 'Toca las palabras en orden') : 'Toca los pasos en orden') + '</span>') + '</div>' +
+        (r ? '' : '<div class="tiles ' + (isB ? '' : 'col') + '">' + bank + '</div>' + (spare ? '<p class="hint spare">Algunas palabras sobran.</p>' : ''));
     }
     if (ex.type === 'flag') {
       var w = RET.WHO[ex.msg.who];
